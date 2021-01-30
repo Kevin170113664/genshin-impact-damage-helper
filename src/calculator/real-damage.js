@@ -15,7 +15,7 @@ export class Calculator {
               }, targetStats) {
     this.attack = attack;
     this.attackType = attackType;
-    this.criticalRatio = criticalRatio;
+    this.criticalRatio = criticalRatio > 1 ? 1 : criticalRatio;
     this.criticalDamage = criticalDamage;
     this.ratio = ratio;
     this.level = level;
