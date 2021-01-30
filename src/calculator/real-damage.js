@@ -1,7 +1,6 @@
-import sum from 'lodash/sum';
-import values from 'lodash/values';
 import {round2} from './rounding';
 import {E} from '../constant/element';
+import {ATTACK_TYPE} from '../constant/attack-type';
 
 export class Calculator {
   constructor({attack, attackType, criticalRatio, criticalDamage, ratio, level, damageBoost}, targetStatistics) {
@@ -38,7 +37,7 @@ export class Calculator {
   }
 
   get damageBoostMultiplier() {
-    return 1 + sum(values(this.damageBoost))
+    return 1 + this.damageBoost.other + (this.damageBoost[this.attackType] || 0)
   }
 
   get elementReactionMultiplier() {
@@ -70,14 +69,14 @@ export class Calculator {
 
   initDamageBoost(damageBoost) {
     return {
-      pyro: 0,
-      hydro: 0,
-      dendro: 0,
-      electro: 0,
-      anemo: 0,
-      cryo: 0,
-      geo: 0,
-      physical: 0,
+      [ATTACK_TYPE.PYRO]: 0,
+      [ATTACK_TYPE.HYDRO]: 0,
+      [ATTACK_TYPE.DENTRO]: 0,
+      [ATTACK_TYPE.ELECTRO]: 0,
+      [ATTACK_TYPE.ANEMO]: 0,
+      [ATTACK_TYPE.CRYO]: 0,
+      [ATTACK_TYPE.GEO]: 0,
+      [ATTACK_TYPE.PHYSICAL]: 0,
       other: 0,
       ...damageBoost
     }

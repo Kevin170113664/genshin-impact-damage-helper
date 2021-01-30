@@ -1,5 +1,6 @@
 import {Calculator} from './real-damage';
 import {E} from '../constant/element';
+import {ATTACK_TYPE} from '../constant/attack-type';
 
 describe('real damage calculator', () => {
   test('should be able to calculate first normal attack damage for 甘雨', () => {
@@ -49,7 +50,8 @@ describe('real damage calculator', () => {
       criticalDamage: 0.5,
       ratio: 0.317,
       level: 90,
-      damageBoost: {physical: 0.583}
+      attackType: ATTACK_TYPE.PHYSICAL,
+      damageBoost: {[ATTACK_TYPE.PHYSICAL]: 0.583}
     };
     const targetStatistics = {
       level: 90,
@@ -71,7 +73,30 @@ describe('real damage calculator', () => {
       ratio: 1.24,
       level: 90,
       attackType: E.CRYO,
-      damageBoost: {cryo: 0.466}
+      damageBoost: {[E.CRYO]: 0.466}
+    };
+    const targetStatistics = {
+      level: 85,
+      resistRatio: 0.1,
+      attachedElement: E.PYRO
+    }
+
+    const [damageExpectation, normalDamage, criticalDamage] = new Calculator(GanyuStatistics, targetStatistics).calculate();
+
+    expect(damageExpectation).toEqual(1274.49);
+    expect(normalDamage).toEqual(1243.40);
+    expect(criticalDamage).toEqual(1865.10);
+  })
+
+  test('should only calculate damage boost with specify type', () => {
+    const GanyuStatistics = {
+      attack: 1000,
+      criticalRatio: 0.05,
+      criticalDamage: 0.5,
+      ratio: 1.24,
+      level: 90,
+      attackType: E.CRYO,
+      damageBoost: {[E.CRYO]: 0.466, [ATTACK_TYPE.PHYSICAL]: 0.583}
     };
     const targetStatistics = {
       level: 85,
@@ -94,7 +119,7 @@ describe('real damage calculator', () => {
       ratio: 1.24,
       level: 90,
       attackType: E.CRYO,
-      damageBoost: {cryo: 0.466}
+      damageBoost: {[E.CRYO]: 0.466}
     };
     const targetStatistics = {
       level: 85,
@@ -117,7 +142,7 @@ describe('real damage calculator', () => {
       ratio: 1.24,
       level: 90,
       attackType: E.CRYO,
-      damageBoost: {cryo: 0.466}
+      damageBoost: {[E.CRYO]: 0.466}
     };
     const targetStatistics = {
       level: 85,
