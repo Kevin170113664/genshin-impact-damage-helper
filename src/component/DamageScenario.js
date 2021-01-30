@@ -86,12 +86,12 @@ function DamageScenario({reports}) {
     ];
 
     return (
-      <>
+      <div key={index.toString()}>
         <Row justify="center" className="table-description">{report.description}</Row>
-        <Row justify="center" key={index.toString()}>
+        <Row justify="center">
           <Table columns={columns} dataSource={dataSource} pagination={false} size="small"/>
         </Row>
-      </>
+      </div>
     )
   }
 
