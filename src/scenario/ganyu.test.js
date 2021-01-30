@@ -50,6 +50,21 @@ describe('scenario', () => {
             [E.CRYO]: 0.616
           }
         }
+      },
+      {
+        description: '发动试做澹月特效后站在冰雨内(双冰共鸣，20突破天赋，冰套4)',
+        characterStats: {
+          attack: 2482,
+          criticalRatio: 0.74,
+          criticalDamage: 2.198,
+          level: 81,
+          mastery: 0,
+          talentLevels: [11, 3, 6],
+          damageBoost: {
+            [E.CRYO]: 0.616,
+            other: 0.2
+          }
+        }
       }
     ])
   })
