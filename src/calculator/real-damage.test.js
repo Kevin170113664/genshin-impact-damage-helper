@@ -48,7 +48,7 @@ describe('real damage calculator', () => {
       criticalDamage: 0.5,
       ratio: 0.317,
       level: 90,
-      physicalDamageBoost: 0.583
+      damageBoost: {physical: 0.583}
     };
     const targetStatistics = {
       level: 90,

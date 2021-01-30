@@ -1,13 +1,15 @@
+import sum from 'lodash/sum';
+import values from 'lodash/values';
 import {round2} from './rounding';
 
 export class Calculator {
-  constructor({attack, criticalRatio, criticalDamage, ratio, level, physicalDamageBoost}, targetStatistics) {
+  constructor({attack, criticalRatio, criticalDamage, ratio, level, damageBoost}, targetStatistics) {
     this.attack = attack;
     this.criticalRatio = criticalRatio;
     this.criticalDamage = criticalDamage;
     this.ratio = ratio;
     this.level = level;
-    this.physicalDamageBoost = physicalDamageBoost || 0;
+    this.damageBoost = this.initDamageBoost(damageBoost);
 
     this.target = targetStatistics
   }
@@ -31,6 +33,21 @@ export class Calculator {
   }
 
   get damageBoostMultiplier() {
-    return 1 + this.physicalDamageBoost
+    return 1 + sum(values(this.damageBoost))
+  }
+
+  initDamageBoost(damageBoost) {
+    return {
+      pyro: 0,
+      hydro: 0,
+      dendro: 0,
+      electro: 0,
+      anemo: 0,
+      cryo: 0,
+      geo: 0,
+      physical: 0,
+      other: 0,
+      ...damageBoost
+    }
   }
 }
