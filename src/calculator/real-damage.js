@@ -17,22 +17,20 @@ export class Calculator {
   }
 
   calculate() {
-    const attack = this.attack * this.levelMultiplier;
-
-    const normalDamage = attack * this.ratio * this.resistantMultiplier * this.damageBoostMultiplier * this.elementReactionMultiplier;
-    const criticalDamage = attack * this.ratio * this.resistantMultiplier * (1 + this.criticalDamage) * this.damageBoostMultiplier * this.elementReactionMultiplier;
+    const normalDamage = this.attackMultiplier * this.ratio * this.resistantMultiplier * this.damageBoostMultiplier * this.elementReactionMultiplier;
+    const criticalDamage = this.attackMultiplier * this.ratio * this.resistantMultiplier * (1 + this.criticalDamage) * this.damageBoostMultiplier * this.elementReactionMultiplier;
     const damageExpectation = this.criticalRatio * criticalDamage + (1 - this.criticalRatio) * normalDamage;
 
     return [round2(damageExpectation), round2(normalDamage), round2(criticalDamage)]
   }
 
-  get levelMultiplier() {
+  get attackMultiplier() {
     const baseLevelMultiplier = (this.level + 100) / (this.level + 100 + (this.target.level + 100) * this.target.defence);
     if (this.target.level - this.level >= 70 && this.level <= 10) {
-      return baseLevelMultiplier * 0.5
+      return this.attack * baseLevelMultiplier * 0.5
     }
 
-    return baseLevelMultiplier
+    return this.attack * baseLevelMultiplier
   }
 
   get damageBoostMultiplier() {
