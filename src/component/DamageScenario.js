@@ -1,46 +1,8 @@
 import {Row, Col, Table, Tag} from 'antd';
+import map from 'lodash/map'
 import './DamageScenario.css';
 
-const report = {
-  chargeLevel2: {
-    frostflakeArrow: {
-      criticalDamage: 11391.22,
-      damageExpectation: 5049.54,
-      normalDamage: 3561.98
-    },
-    frostflakeArrowBloom: {
-      criticalDamage: 19360.39,
-      damageExpectation: 8582.14,
-      normalDamage: 6053.9
-    }
-  },
-  elementalSkill: {
-    '1-hit': {
-      criticalDamage: 7125.37,
-      damageExpectation: 3158.56,
-      normalDamage: 2228.07
-    },
-    '2-hit': {
-      criticalDamage: 7125.37,
-      damageExpectation: 3158.56,
-      normalDamage: 2228.07
-    }
-  },
-  elementalBurst: {
-    allIceShard: {
-      criticalDamage: 234293.49,
-      damageExpectation: 103858.44,
-      normalDamage: 73262.52
-    },
-    singleIceShard: {
-      criticalDamage: 4593.99,
-      damageExpectation: 2036.44,
-      normalDamage: 1436.52
-    },
-  }
-}
-
-function DamageScenario() {
+function DamageScenario({reports}) {
   const columns = [
     {
       title: '未暴击伤害',
@@ -64,10 +26,7 @@ function DamageScenario() {
       render: tags => (
         <>
           {tags.map(tag => {
-            let color = 'green';
-            if (tag === '未发动试做澹月特效') {
-              color = 'volcano';
-            }
+            const color = 'green';
             return (
               <Tag color={color} key={tag}>
                 {tag.toUpperCase()}
@@ -79,64 +38,66 @@ function DamageScenario() {
     },
   ];
 
-  const dataSource = [
-    {
-      key: '1',
-      criticalDamage: 11391.22,
-      damageExpectation: 5049.54,
-      normalDamage: 3561.98,
-      tags: ['二段蓄力霜华矢'],
-    },
-    {
-      key: '2',
-      criticalDamage: 19360.39,
-      damageExpectation: 8582.14,
-      normalDamage: 6053.9,
-      tags: ['二段蓄力霜华绽放'],
-    },
-    {
-      key: '3',
-      criticalDamage: 7125.37,
-      damageExpectation: 3158.56,
-      normalDamage: 2228.07,
-      tags: ['施放元素战技'],
-    },
-    {
-      key: '4',
-      criticalDamage: 7125.37,
-      damageExpectation: 3158.56,
-      normalDamage: 2228.07,
-      tags: ['冰莲爆炸'],
-    },
-    {
-      key: '5',
-      criticalDamage: 4593.99,
-      damageExpectation: 2036.44,
-      normalDamage: 1436.52,
-      tags: ['元素爆发1根冰棱伤害'],
-    },
-    {
-      key: '6',
-      criticalDamage: 234293.49,
-      damageExpectation: 103858.44,
-      normalDamage: 73262.52,
-      tags: ['元素爆发51根冰棱总伤害'],
-    },
-  ];
+  function renderTable(report, index) {
+    const {chargeLevel2, elementalSkill, elementalBurst} = report;
+    const dataSource = [
+      {
+        key: '1',
+        criticalDamage: chargeLevel2.frostflakeArrow.criticalDamage,
+        damageExpectation: chargeLevel2.frostflakeArrow.damageExpectation,
+        normalDamage: chargeLevel2.frostflakeArrow.normalDamage,
+        tags: ['二段蓄力霜华矢'],
+      },
+      {
+        key: '2',
+        criticalDamage: chargeLevel2.frostflakeArrowBloom.criticalDamage,
+        damageExpectation: chargeLevel2.frostflakeArrowBloom.damageExpectation,
+        normalDamage: chargeLevel2.frostflakeArrowBloom.normalDamage,
+        tags: ['二段蓄力霜华绽放'],
+      },
+      {
+        key: '3',
+        criticalDamage: elementalSkill['1-hit'].criticalDamage,
+        damageExpectation: elementalSkill['1-hit'].damageExpectation,
+        normalDamage: elementalSkill['1-hit'].normalDamage,
+        tags: ['施放元素战技'],
+      },
+      {
+        key: '4',
+        criticalDamage: elementalSkill['2-hit'].criticalDamage,
+        damageExpectation: elementalSkill['2-hit'].damageExpectation,
+        normalDamage: elementalSkill['2-hit'].normalDamage,
+        tags: ['冰莲爆炸'],
+      },
+      {
+        key: '5',
+        criticalDamage: elementalBurst.singleIceShard.criticalDamage,
+        damageExpectation: elementalBurst.singleIceShard.damageExpectation,
+        normalDamage: elementalBurst.singleIceShard.normalDamage,
+        tags: ['元素爆发1根冰棱伤害'],
+      },
+      {
+        key: '6',
+        criticalDamage: elementalBurst.allIceShard.criticalDamage,
+        damageExpectation: elementalBurst.allIceShard.damageExpectation,
+        normalDamage: elementalBurst.allIceShard.normalDamage,
+        tags: ['元素爆发51根冰棱总伤害'],
+      },
+    ];
 
-  function renderOneRow(title, value) {
-    return (<Row className="stat-row">
-      <Col span={12}>{title}</Col>
-      <Col span={12} className='stat-value'>{value}</Col>
-    </Row>)
+    return (
+      <>
+        <Row justify="center" className="table-description">{report.description}</Row>
+        <Row justify="center" key={index.toString()}>
+          <Table columns={columns} dataSource={dataSource} pagination={false} size="small"/>
+        </Row>
+      </>
+    )
   }
 
   return (
     <div className="damage-scenario">
-      <Row justify="center">未发动试做澹月特效</Row>
-      <Row justify="center">
-        <Table columns={columns} dataSource={dataSource} pagination={false} size="small"/>
-      </Row>
+      {map(reports, (report, index) => renderTable(report, index))}
       <div className="footer">这计算器依然是一个未成熟的作品，请勿传播哟</div>
     </div>
   );

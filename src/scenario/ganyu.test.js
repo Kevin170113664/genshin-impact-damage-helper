@@ -25,7 +25,7 @@ describe('scenario', () => {
     expect(scenarios).toEqual([
       {
         description: '发动试做澹月特效前',
-        ganyuStats: {
+        characterStats: {
           attack: 2038,
           criticalRatio: 0.19,
           criticalDamage: 2.198,
@@ -39,7 +39,7 @@ describe('scenario', () => {
       },
       {
         description: '发动试做澹月特效后',
-        ganyuStats: {
+        characterStats: {
           attack: 2482,
           criticalRatio: 0.19,
           criticalDamage: 2.198,

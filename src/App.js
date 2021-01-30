@@ -1,8 +1,35 @@
 import {Row, Col} from 'antd';
 import DamageScenario from './component/DamageScenario';
 import './App.css';
+import {E} from './constant/element';
+import {Scenario} from './scenario/ganyu';
+import {Report} from './report/ganyu';
 
 function App() {
+  const ganyuStats = {
+    basicAttack: 823,
+    additionalAttack: 1215,
+    criticalRatio: 0.19,
+    criticalDamage: 2.198,
+    level: 81,
+    mastery: 0,
+    talentLevels: [11, 3, 6],
+    damageBoost: {
+      [E.CRYO]: 0.616
+    }
+  };
+  const weaponStats = {
+    name: 'prototype_crescent',
+    level: 90,
+    refineRank: 3
+  };
+
+  const scenarios = new Scenario(ganyuStats, weaponStats).generate();
+  const reports = scenarios.map(scenario => {
+    const report = new Report(scenario.characterStats).generate();
+    return {description: scenario.description, ...report}
+  })
+
   function renderOneRow(title, value) {
     return (<Row className="stat-row">
       <Col span={3} offset={9}>{title}</Col>
@@ -42,7 +69,7 @@ function App() {
         {renderOneRow('元素战技', '3')}
         {renderOneRow('元素爆发', '6')}
       </div>
-      <DamageScenario/>
+      <DamageScenario reports={reports}/>
     </div>
   );
 }

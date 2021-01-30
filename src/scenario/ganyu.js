@@ -17,14 +17,14 @@ export class Scenario {
     return [
       {
         description: '发动试做澹月特效前',
-        ganyuStats: {
+        characterStats: {
           attack: this.basicAttack + this.additionalAttack,
           ...this.characterStats,
         }
       },
       {
         description: '发动试做澹月特效后',
-        ganyuStats: {
+        characterStats: {
           attack: round0(this.basicAttack * (1 + attackIncreaseRatio) + this.additionalAttack),
           ...this.characterStats,
         }

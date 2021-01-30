@@ -11,3 +11,7 @@ thead, table, td, tr, th {
 td {
     color: #0efae1 !important;
 }
+
+.table-description {
+    padding-top: 20px
+}
