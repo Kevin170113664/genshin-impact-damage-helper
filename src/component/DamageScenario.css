@@ -7,3 +7,7 @@ thead, table, td, tr, th {
     background: #474646 !important;
     color: #ffffff !important;
 }
+
+td {
+    color: #0efae1 !important;
+}

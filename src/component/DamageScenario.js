@@ -135,10 +135,10 @@ function DamageScenario() {
     <div className="damage-scenario">
       <Row>
         <Col span={9} offset={2}>
-          <Table columns={columns} dataSource={dataSource} pagination={false}/>
+          <Table columns={columns} dataSource={dataSource} pagination={false} size="small"/>
         </Col>
         <Col span={9} offset={1}>
-          <Table columns={columns} dataSource={dataSource} pagination={false}/>
+          <Table columns={columns} dataSource={dataSource} pagination={false} size="small"/>
         </Col>
       </Row>
       <div className="footer">这计算器依然是一个未成熟的作品，请勿传播哟</div>
