@@ -12,7 +12,7 @@ export class Calculator {
                 level,
                 mastery,
                 damageBoost
-              }, targetStatistics) {
+              }, targetStats) {
     this.attack = attack;
     this.attackType = attackType;
     this.criticalRatio = criticalRatio;
@@ -22,7 +22,7 @@ export class Calculator {
     this.mastery = mastery || 0;
 
     this.damageBoost = this.initDamageBoost(damageBoost);
-    this.target = this.initTargetStatistics(targetStatistics)
+    this.target = this.initTargetStats(targetStats)
   }
 
   calculate() {
@@ -117,13 +117,13 @@ export class Calculator {
     }
   }
 
-  initTargetStatistics(targetStatistics) {
+  initTargetStats(targetStats) {
     return {
       level: 100,
       defence: 1,
       resistRatio: 0.1,
       attachedElement: undefined,
-      ...targetStatistics
+      ...targetStats
     }
   }
 }
