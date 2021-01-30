@@ -1,4 +1,5 @@
 import {Calculator} from './real-damage';
+import {E} from '../constant/element';
 
 describe('real damage calculator', () => {
   test('should be able to calculate first normal attack damage for 甘雨', () => {
@@ -41,7 +42,7 @@ describe('real damage calculator', () => {
     expect(criticalDamage).toEqual(7.43);
   })
 
-  test('should be able to calculate first normal attack damage for 甘雨 with physical damage cup', () => {
+  test('should be able to calculate first normal attack damage for 甘雨 with physical damage goblet', () => {
     const GanyuStatistics = {
       attack: 1000,
       criticalRatio: 0.05,
@@ -60,5 +61,28 @@ describe('real damage calculator', () => {
     expect(damageExpectation).toEqual(231.46);
     expect(normalDamage).toEqual(225.81);
     expect(criticalDamage).toEqual(338.72);
+  })
+
+  test('should be able to calculate first charge attack for 甘雨 with melt reaction', () => {
+    const GanyuStatistics = {
+      attack: 1000,
+      criticalRatio: 0.05,
+      criticalDamage: 0.5,
+      ratio: 1.24,
+      level: 90,
+      attackType: E.CRYO,
+      damageBoost: {cryo: 0.466}
+    };
+    const targetStatistics = {
+      level: 85,
+      resistRatio: 0.1,
+      attachedElement: E.PYRO
+    }
+
+    const [damageExpectation, normalDamage, criticalDamage] = new Calculator(GanyuStatistics, targetStatistics).calculate();
+
+    expect(damageExpectation).toEqual(1274.49);
+    expect(normalDamage).toEqual(1243.40);
+    expect(criticalDamage).toEqual(1865.10);
   })
 })

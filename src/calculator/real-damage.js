@@ -1,10 +1,12 @@
 import sum from 'lodash/sum';
 import values from 'lodash/values';
 import {round2} from './rounding';
+import {E} from '../constant/element';
 
 export class Calculator {
-  constructor({attack, criticalRatio, criticalDamage, ratio, level, damageBoost}, targetStatistics) {
+  constructor({attack, attackType, criticalRatio, criticalDamage, ratio, level, damageBoost}, targetStatistics) {
     this.attack = attack;
+    this.attackType = attackType;
     this.criticalRatio = criticalRatio;
     this.criticalDamage = criticalDamage;
     this.ratio = ratio;
@@ -16,9 +18,10 @@ export class Calculator {
 
   calculate() {
     const attack = this.attack * this.levelMultiplier;
+    const resistantMultiplier = 1 - this.target.resistRatio;
 
-    const normalDamage = attack * this.ratio * (1 - this.target.resistRatio) * this.damageBoostMultiplier;
-    const criticalDamage = attack * this.ratio * (1 - this.target.resistRatio) * (1 + this.criticalDamage) * this.damageBoostMultiplier;
+    const normalDamage = attack * this.ratio * resistantMultiplier * this.damageBoostMultiplier * this.elementReactionMultiplier;
+    const criticalDamage = attack * this.ratio * resistantMultiplier * (1 + this.criticalDamage) * this.damageBoostMultiplier * this.elementReactionMultiplier;
     const damageExpectation = this.criticalRatio * criticalDamage + (1 - this.criticalRatio) * normalDamage;
 
     return [round2(damageExpectation), round2(normalDamage), round2(criticalDamage)]
@@ -34,6 +37,22 @@ export class Calculator {
 
   get damageBoostMultiplier() {
     return 1 + sum(values(this.damageBoost))
+  }
+
+  get elementReactionMultiplier() {
+    if (this.attackType === E.CRYO && this.target.attachedElement === E.PYRO) {
+      return 1.5
+    }
+    if (this.attackType === E.PYRO && this.target.attachedElement === E.CRYO) {
+      return 2
+    }
+    if (this.attackType === E.PYRO && this.target.attachedElement === E.HYDRO) {
+      return 1.5
+    }
+    if (this.attackType === E.HYDRO && this.target.attachedElement === E.PYRO) {
+      return 2
+    }
+    return 1;
   }
 
   initDamageBoost(damageBoost) {
