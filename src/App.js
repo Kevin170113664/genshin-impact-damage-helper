@@ -47,15 +47,23 @@ function App() {
         <Row>期望伤害 xxx</Row>
         <Row>未暴击伤害 xxx</Row>
         <Row>暴击伤害 xxx</Row>
+
         <Row>二段蓄力伤害（触发特效后）</Row>
         <Row>期望伤害 xxx</Row>
         <Row>未暴击伤害 xxx</Row>
         <Row>暴击伤害 xxx</Row>
+
         <Row>元素战技</Row>
         <Row>期望伤害 xxx</Row>
         <Row>未暴击伤害 xxx</Row>
         <Row>暴击伤害 xxx</Row>
-        <Row>元素爆发</Row>
+
+        <Row>元素爆发单发冰棱</Row>
+        <Row>期望伤害 xxx</Row>
+        <Row>未暴击伤害 xxx</Row>
+        <Row>暴击伤害 xxx</Row>
+
+        <Row>元素爆发最大伤害(51个冰棱)</Row>
         <Row>期望伤害 xxx</Row>
         <Row>未暴击伤害 xxx</Row>
         <Row>暴击伤害 xxx</Row>

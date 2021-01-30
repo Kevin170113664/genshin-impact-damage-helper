@@ -1,16 +1,16 @@
 export const TALENT_GANYU = {
   normal: {
-    1: {frostFlakeArrow: 1.28, frostFlakeArrowBloom: 2.18},
-    2: {frostFlakeArrow: 1.38, frostFlakeArrowBloom: 2.34},
-    3: {frostFlakeArrow: 1.47, frostFlakeArrowBloom: 2.50},
-    4: {frostFlakeArrow: 1.60, frostFlakeArrowBloom: 2.72},
-    5: {frostFlakeArrow: 1.70, frostFlakeArrowBloom: 2.88},
-    6: {frostFlakeArrow: 1.79, frostFlakeArrowBloom: 3.05},
-    7: {frostFlakeArrow: 1.92, frostFlakeArrowBloom: 3.26},
-    8: {frostFlakeArrow: 2.05, frostFlakeArrowBloom: 3.48},
-    9: {frostFlakeArrow: 2.18, frostFlakeArrowBloom: 3.70},
-    10: {frostFlakeArrow: 2.30, frostFlakeArrowBloom: 3.92},
-    11: {frostFlakeArrow: 2.43, frostFlakeArrowBloom: 4.13}
+    1: {frostflakeArrow: 1.28, frostflakeArrowBloom: 2.18},
+    2: {frostflakeArrow: 1.38, frostflakeArrowBloom: 2.34},
+    3: {frostflakeArrow: 1.47, frostflakeArrowBloom: 2.50},
+    4: {frostflakeArrow: 1.60, frostflakeArrowBloom: 2.72},
+    5: {frostflakeArrow: 1.70, frostflakeArrowBloom: 2.88},
+    6: {frostflakeArrow: 1.79, frostflakeArrowBloom: 3.05},
+    7: {frostflakeArrow: 1.92, frostflakeArrowBloom: 3.26},
+    8: {frostflakeArrow: 2.05, frostflakeArrowBloom: 3.48},
+    9: {frostflakeArrow: 2.18, frostflakeArrowBloom: 3.70},
+    10: {frostflakeArrow: 2.30, frostflakeArrowBloom: 3.92},
+    11: {frostflakeArrow: 2.43, frostflakeArrowBloom: 4.13}
   },
   skill: {
     1: 1.32,
