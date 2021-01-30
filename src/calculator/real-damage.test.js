@@ -177,4 +177,28 @@ describe('real damage calculator', () => {
     expect(normalDamage).toEqual(170.56);
     expect(criticalDamage).toEqual(255.84);
   })
+
+  test('should be able to calculate first charge attack for 甘雨 with melt reaction and high mastery', () => {
+    const GanyuStatistics = {
+      attack: 1000,
+      criticalRatio: 0.05,
+      criticalDamage: 0.5,
+      ratio: 1.24,
+      level: 90,
+      attackType: E.CRYO,
+      mastery: 219,
+      damageBoost: {[E.CRYO]: 0.466}
+    };
+    const targetStatistics = {
+      level: 85,
+      resistRatio: 0.1,
+      attachedElement: E.PYRO
+    }
+
+    const [damageExpectation, normalDamage, criticalDamage] = new Calculator(GanyuStatistics, targetStatistics).calculate();
+
+    expect(damageExpectation).toEqual(1753.37);
+    expect(normalDamage).toEqual(1710.61);
+    expect(criticalDamage).toEqual(2565.91);
+  })
 })

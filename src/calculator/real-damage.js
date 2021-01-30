@@ -3,13 +3,23 @@ import {E} from '../constant/element';
 import {ATTACK_TYPE} from '../constant/attack-type';
 
 export class Calculator {
-  constructor({attack, attackType, criticalRatio, criticalDamage, ratio, level, damageBoost}, targetStatistics) {
+  constructor({
+                attack,
+                attackType,
+                criticalRatio,
+                criticalDamage,
+                ratio,
+                level,
+                mastery,
+                damageBoost
+              }, targetStatistics) {
     this.attack = attack;
     this.attackType = attackType;
     this.criticalRatio = criticalRatio;
     this.criticalDamage = criticalDamage;
     this.ratio = ratio;
     this.level = level;
+    this.mastery = mastery || 0;
 
     this.damageBoost = this.initDamageBoost(damageBoost);
     this.target = this.initTargetStatistics(targetStatistics)
@@ -41,17 +51,39 @@ export class Calculator {
   }
 
   get elementReactionMultiplier() {
+    // SP = 1 + MR + RE + AE
+    // MR = k * 25EM / 9 * (EM + 1400)
+    // 其中k为类型系数，融化，蒸发为1，聚变为2.4。
+    // EM(Element Ratio)为元素精通数值，受到角色突破，角色天赋，武器副词缀，圣遗物主词条，圣遗物副词条，圣遗物套装效果影响。
+    // AE(Amplification Enhance)为增幅强度 魔女4蒸发融化增强15%
+    // RE(Reaction Enhancement)为反应增强 莫娜命之座1增强与水相关的反应15%
+    const typeMultiplier = {
+      vaporize: 1,
+      melt: 1,
+      overloaded: 2.4,
+      superconduct: 2.4,
+      electroCharged: 2.4,
+      shattered: 2.4,
+      swirl: 2.4
+    }
+    const reactionMultiplier = {
+      cryoPyroMelt: 1.5,
+      pyroCryoMelt: 2,
+      pyroHydroVaporize: 1.5,
+      hydroPyroVaporize: 2,
+    }
+    const masteryBoost = (typeMultiplier.melt * 25 * this.mastery) / (9 * (this.mastery + 1400))
     if (this.attackType === E.CRYO && this.target.attachedElement === E.PYRO) {
-      return 1.5
+      return (1 + masteryBoost) * reactionMultiplier.cryoPyroMelt
     }
     if (this.attackType === E.PYRO && this.target.attachedElement === E.CRYO) {
-      return 2
+      return (1 + masteryBoost) * reactionMultiplier.pyroCryoMelt
     }
     if (this.attackType === E.PYRO && this.target.attachedElement === E.HYDRO) {
-      return 1.5
+      return (1 + masteryBoost) * reactionMultiplier.pyroHydroVaporize
     }
     if (this.attackType === E.HYDRO && this.target.attachedElement === E.PYRO) {
-      return 2
+      return (1 + masteryBoost) * reactionMultiplier.hydroPyroVaporize
     }
     return 1;
   }
