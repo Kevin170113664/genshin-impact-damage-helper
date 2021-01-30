@@ -23,67 +23,49 @@ export class Scenario {
   }
 
   generateAmosScenarios() {
-    return [
-      {
-        description: '贴脸二段蓄力射，霜华矢不足0.1秒即击中敌人',
-        characterStats: {
-          attack: 2358,
-          criticalRatio: 0.25,
-          criticalDamage: 2.4,
-          level: 90,
-          mastery: 0,
-          talentLevels: [11, 13, 13],
-          damageBoost: {
-            [E.CRYO]: 0.616,
-            other: 0.12
-          }
+    const [amosChargeAttackBonus, amosChargeAttackAdditionalBonus] = WEAPON_AMOS_BOW.refine[this.weaponStats.refineRank]
+    const scenario1 = {
+      description: '贴脸二段蓄力射，霜华矢不足0.1秒即击中敌人',
+      characterStats: {
+        ...this.characterStats,
+        attack: round0(this.basicAttack + this.additionalAttack),
+        damageBoost: {
+          ...this.characterStats.damageBoost,
+          other: round2((this.characterStats.damageBoost.other || 0) + amosChargeAttackBonus)
         }
       },
-      {
-        description: '和怪的距离为一个冰雨半径，霜华矢吃2段加成，霜华绽放吃满5段加成',
-        characterStats: {
-          attack: 2358,
-          criticalRatio: 0.25,
-          criticalDamage: 2.4,
-          level: 90,
-          mastery: 0,
-          talentLevels: [11, 13, 13],
-          damageBoost: {
-            [E.CRYO]: 0.616,
-            other: 0.28
-          }
+    };
+    const scenario2 = {
+      description: '和怪的距离为一个冰雨半径，霜华矢吃2段加成，霜华绽放吃满5段加成',
+      characterStats: {
+        ...this.characterStats,
+        attack: round0(this.basicAttack + this.additionalAttack),
+        damageBoost: {
+          ...this.characterStats.damageBoost,
+          other: round2((this.characterStats.damageBoost.other || 0) + amosChargeAttackBonus + amosChargeAttackAdditionalBonus * 2)
         }
       },
-      {
-        description: '和怪的距离超过一个冰雨直径，二段蓄力射均吃满加成',
-        characterStats: {
-          attack: 2358,
-          criticalRatio: 0.25,
-          criticalDamage: 2.4,
-          level: 90,
-          mastery: 0,
-          talentLevels: [11, 13, 13],
-          damageBoost: {
-            [E.CRYO]: 0.616,
-            other: 0.52
-          }
+    };
+    const scenario3 = {
+      description: '和怪的距离超过一个冰雨直径，二段蓄力射均吃满加成',
+      characterStats: {
+        ...this.characterStats,
+        attack: round0(this.basicAttack + this.additionalAttack),
+        damageBoost: {
+          ...this.characterStats.damageBoost,
+          other: round2((this.characterStats.damageBoost.other || 0) + amosChargeAttackBonus + amosChargeAttackAdditionalBonus * 5)
         }
       },
-      {
-        description: '阿莫斯之弓对元素战技和元素爆发没有加成',
-        characterStats: {
-          attack: 2358,
-          criticalRatio: 0.25,
-          criticalDamage: 2.4,
-          level: 90,
-          mastery: 0,
-          talentLevels: [11, 13, 13],
-          damageBoost: {
-            [E.CRYO]: 0.616
-          }
-        }
+    };
+    const scenario4 = {
+      description: '阿莫斯之弓对元素战技和元素爆发没有加成',
+      characterStats: {
+        ...this.characterStats,
+        attack: round0(this.basicAttack + this.additionalAttack),
       }
-    ]
+    };
+
+    return [scenario1, scenario2, scenario3, scenario4]
   }
 
   generateCrescentScenarios() {
