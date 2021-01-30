@@ -24,10 +24,10 @@ describe('scenario', () => {
 
     expect(scenarios).toEqual([
       {
-        description: '发动试做澹月特效前',
+        description: '发动试做澹月特效前(双冰共鸣)',
         characterStats: {
           attack: 2038,
-          criticalRatio: 0.19,
+          criticalRatio: 0.34,
           criticalDamage: 2.198,
           level: 81,
           mastery: 0,
@@ -38,10 +38,10 @@ describe('scenario', () => {
         }
       },
       {
-        description: '发动试做澹月特效后',
+        description: '发动试做澹月特效后(双冰共鸣，20突破天赋，冰套4)',
         characterStats: {
           attack: 2482,
-          criticalRatio: 0.39,
+          criticalRatio: 0.74,
           criticalDamage: 2.198,
           level: 81,
           mastery: 0,
