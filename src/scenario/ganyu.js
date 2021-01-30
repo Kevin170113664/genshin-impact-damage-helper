@@ -6,8 +6,10 @@ export class Scenario {
     this.characterStats = {...characterStats};
     delete this.characterStats.basicAttack;
     delete this.characterStats.additionalAttack;
+    delete this.characterStats.constellation;
     this.basicAttack = characterStats.basicAttack;
     this.additionalAttack = characterStats.additionalAttack;
+    this.constellation = characterStats.constellation;
     this.weaponStats = weaponStats;
   }
 
@@ -17,6 +19,7 @@ export class Scenario {
     const undividedHeartBonus = this.characterStats.level > 20 ? 0.2 : 0
     const blizzardStrayerBonus = 0.2
     const PassiveTalentBonus = this.characterStats.level > 70 ? 0.2 : 0;
+    const targetResistanceReduction = this.constellation >= 1 ? 0.15 : 0;
 
     return [
       {
@@ -31,7 +34,10 @@ export class Scenario {
         characterStats: {
           ...this.characterStats,
           attack: round0(this.basicAttack * (1 + attackIncreaseRatio) + this.additionalAttack),
-          criticalRatio: round2(this.characterStats.criticalRatio + shatteringIceBonus + undividedHeartBonus + blizzardStrayerBonus)
+          criticalRatio: round2(this.characterStats.criticalRatio + shatteringIceBonus + undividedHeartBonus + blizzardStrayerBonus),
+        },
+        targetStats: {
+          resistRatio: round2(0.1 - targetResistanceReduction)
         }
       },
       {
@@ -44,6 +50,9 @@ export class Scenario {
             ...this.characterStats.damageBoost,
             other: (this.characterStats.damageBoost.other || 0) + PassiveTalentBonus
           }
+        },
+        targetStats: {
+          resistRatio: round2(0.1 - targetResistanceReduction)
         }
       }
     ]

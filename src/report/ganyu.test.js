@@ -14,7 +14,11 @@ describe('report', () => {
         [E.CRYO]: 0.616
       }
     };
-    const report = new Report(ganyuStats).generate();
+    const targetStats = {
+      level: 85,
+      resistRatio: 0.1
+    }
+    const report = new Report(ganyuStats, targetStats).generate();
 
     expect(report).toEqual({
       chargeLevel2: {

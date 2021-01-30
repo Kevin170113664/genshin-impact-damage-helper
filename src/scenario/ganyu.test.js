@@ -2,7 +2,7 @@ import {E} from '../constant/element';
 import {Scenario} from './ganyu';
 
 describe('scenario', () => {
-  test('should be able to generate 甘雨 scenario with prototype crescent and 20 ascension done', () => {
+  test('should be able to generate 甘雨 scenario with prototype crescent', () => {
     const ganyuStats = {
       basicAttack: 823,
       additionalAttack: 1215,
@@ -10,6 +10,7 @@ describe('scenario', () => {
       criticalDamage: 2.198,
       level: 81,
       mastery: 0,
+      constellation: 1,
       talentLevels: [11, 3, 6],
       damageBoost: {
         [E.CRYO]: 0.616
@@ -17,7 +18,6 @@ describe('scenario', () => {
     };
     const weaponStats = {
       name: 'prototype_crescent',
-      level: 90,
       refineRank: 3
     };
     const scenarios = new Scenario(ganyuStats, weaponStats).generate();
@@ -49,6 +49,9 @@ describe('scenario', () => {
           damageBoost: {
             [E.CRYO]: 0.616
           }
+        },
+        targetStats: {
+          resistRatio: -0.05
         }
       },
       {
@@ -64,6 +67,9 @@ describe('scenario', () => {
             [E.CRYO]: 0.616,
             other: 0.2
           }
+        },
+        targetStats: {
+          resistRatio: -0.05
         }
       }
     ])
