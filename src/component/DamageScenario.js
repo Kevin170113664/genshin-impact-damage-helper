@@ -85,42 +85,42 @@ function DamageScenario() {
       criticalDamage: 11391.22,
       damageExpectation: 5049.54,
       normalDamage: 3561.98,
-      tags: ['二段蓄力霜华矢', '未发动试做澹月特效'],
+      tags: ['二段蓄力霜华矢'],
     },
     {
       key: '2',
       criticalDamage: 19360.39,
       damageExpectation: 8582.14,
       normalDamage: 6053.9,
-      tags: ['二段蓄力霜华绽放', '未发动试做澹月特效'],
+      tags: ['二段蓄力霜华绽放'],
     },
     {
       key: '3',
       criticalDamage: 7125.37,
       damageExpectation: 3158.56,
       normalDamage: 2228.07,
-      tags: ['施放元素战技', '未发动试做澹月特效'],
+      tags: ['施放元素战技'],
     },
     {
       key: '4',
       criticalDamage: 7125.37,
       damageExpectation: 3158.56,
       normalDamage: 2228.07,
-      tags: ['冰莲爆炸', '未发动试做澹月特效'],
+      tags: ['冰莲爆炸'],
     },
     {
       key: '5',
       criticalDamage: 4593.99,
       damageExpectation: 2036.44,
       normalDamage: 1436.52,
-      tags: ['元素爆发1根冰棱伤害', '未发动试做澹月特效'],
+      tags: ['元素爆发1根冰棱伤害'],
     },
     {
       key: '6',
       criticalDamage: 234293.49,
       damageExpectation: 103858.44,
       normalDamage: 73262.52,
-      tags: ['元素爆发51根冰棱总伤害', '未发动试做澹月特效'],
+      tags: ['元素爆发51根冰棱总伤害'],
     },
   ];
 
@@ -133,13 +133,9 @@ function DamageScenario() {
 
   return (
     <div className="damage-scenario">
-      <Row>
-        <Col span={9} offset={2}>
-          <Table columns={columns} dataSource={dataSource} pagination={false} size="small"/>
-        </Col>
-        <Col span={9} offset={1}>
-          <Table columns={columns} dataSource={dataSource} pagination={false} size="small"/>
-        </Col>
+      <Row justify="center">未发动试做澹月特效</Row>
+      <Row justify="center">
+        <Table columns={columns} dataSource={dataSource} pagination={false} size="small"/>
       </Row>
       <div className="footer">这计算器依然是一个未成熟的作品，请勿传播哟</div>
     </div>
