@@ -17,8 +17,8 @@ export class Calculator {
   }
 
   calculate() {
-    const normalDamage = this.attackMultiplier * this.ratio * this.resistantMultiplier * this.damageBoostMultiplier * this.elementReactionMultiplier;
-    const criticalDamage = this.attackMultiplier * this.ratio * this.resistantMultiplier * (1 + this.criticalDamage) * this.damageBoostMultiplier * this.elementReactionMultiplier;
+    const normalDamage = this.attackMultiplier * this.ratioMultiplier * this.resistantMultiplier * this.damageBoostMultiplier * this.elementReactionMultiplier;
+    const criticalDamage = this.attackMultiplier * this.ratioMultiplier * this.resistantMultiplier * this.damageBoostMultiplier * this.elementReactionMultiplier * this.criticalMultiplier;
     const damageExpectation = this.criticalRatio * criticalDamage + (1 - this.criticalRatio) * normalDamage;
 
     return [round2(damageExpectation), round2(normalDamage), round2(criticalDamage)]
@@ -31,6 +31,10 @@ export class Calculator {
     }
 
     return this.attack * baseLevelMultiplier
+  }
+
+  get ratioMultiplier() {
+    return this.ratio
   }
 
   get damageBoostMultiplier() {
@@ -57,7 +61,11 @@ export class Calculator {
     if (this.target.resistRatio < 0) {
       return 1 - (this.target.resistRatio / 2)
     }
-    return 1 - this.target.resistRatio;
+    return 1 - this.target.resistRatio
+  }
+
+  get criticalMultiplier() {
+    return 1 + this.criticalDamage
   }
 
   initDamageBoost(damageBoost) {
