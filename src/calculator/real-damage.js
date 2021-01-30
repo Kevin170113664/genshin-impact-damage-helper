@@ -57,6 +57,9 @@ export class Calculator {
   }
 
   get resistantMultiplier() {
+    if (this.target.resistRatio > 0.75) {
+      return 1 / (1 + 4 * this.target.resistRatio)
+    }
     if (this.target.resistRatio < 0) {
       return 1 - (this.target.resistRatio / 2)
     }
