@@ -1,12 +1,13 @@
 import {round2} from './rounding';
 
 export class Calculator {
-  constructor({attack, criticalRatio, criticalDamage, ratio, level}, targetStatistics) {
+  constructor({attack, criticalRatio, criticalDamage, ratio, level, physicalDamageBoost}, targetStatistics) {
     this.attack = attack;
     this.criticalRatio = criticalRatio;
     this.criticalDamage = criticalDamage;
     this.ratio = ratio;
     this.level = level;
+    this.physicalDamageBoost = physicalDamageBoost || 0;
 
     this.target = targetStatistics
   }
@@ -14,8 +15,8 @@ export class Calculator {
   calculate() {
     const attack = this.attack * this.levelMultiplier;
 
-    const normalDamage = attack * this.ratio * (1 - this.target.resistRatio);
-    const criticalDamage = attack * this.ratio * (1 - this.target.resistRatio) * (1 + this.criticalDamage);
+    const normalDamage = attack * this.ratio * (1 - this.target.resistRatio) * this.damageBoostMultiplier;
+    const criticalDamage = attack * this.ratio * (1 - this.target.resistRatio) * (1 + this.criticalDamage) * this.damageBoostMultiplier;
     const damageExpectation = this.criticalRatio * criticalDamage + (1 - this.criticalRatio) * normalDamage;
 
     return [round2(damageExpectation), round2(normalDamage), round2(criticalDamage)]
@@ -27,5 +28,9 @@ export class Calculator {
     }
 
     return (this.level + 100) / (this.level + this.target.level + 200)
+  }
+
+  get damageBoostMultiplier() {
+    return 1 + this.physicalDamageBoost
   }
 }

@@ -40,4 +40,25 @@ describe('real damage calculator', () => {
     expect(normalDamage).toEqual(4.95);
     expect(criticalDamage).toEqual(7.43);
   })
+
+  test('should be able to calculate first normal attack damage for 甘雨 with physical damage cup', () => {
+    const GanyuStatistics = {
+      attack: 1000,
+      criticalRatio: 0.05,
+      criticalDamage: 0.5,
+      ratio: 0.317,
+      level: 90,
+      physicalDamageBoost: 0.583
+    };
+    const targetStatistics = {
+      level: 90,
+      resistRatio: 0.1
+    }
+
+    const [damageExpectation, normalDamage, criticalDamage] = new Calculator(GanyuStatistics, targetStatistics).calculate();
+
+    expect(damageExpectation).toEqual(231.46);
+    expect(normalDamage).toEqual(225.81);
+    expect(criticalDamage).toEqual(338.72);
+  })
 })
