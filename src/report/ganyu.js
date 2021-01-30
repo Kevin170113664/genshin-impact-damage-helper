@@ -1,12 +1,15 @@
+import max from 'lodash/max';
 import {Calculator} from '../calculator/real-damage';
 import {TALENT_GANYU} from '../constant/talent';
 import {ATTACK_TYPE} from '../constant/attack-type';
 import {round2} from '../calculator/rounding';
+import {WEAPON_AMOS_BOW} from '../constant/weapon';
 
 export class Report {
-  constructor(ganyuStats, targetStats) {
+  constructor(ganyuStats, targetStats, weaponStats) {
     this.ganyuStats = this.initCharacterStats(ganyuStats);
     this.targetStats = this.initTargetStats(targetStats);
+    this.weaponStats = this.initWeaponStats(weaponStats);
   }
 
   initCharacterStats(ganyuStats) {
@@ -32,11 +35,61 @@ export class Report {
     }
   }
 
+  initWeaponStats(weaponStats) {
+    return {
+      refineRank: 1,
+      ...weaponStats
+    }
+  }
+
   generate() {
+    if (this.weaponStats.name === WEAPON_AMOS_BOW.name && this.weaponStats.isChargedAttack) {
+      return {
+        chargeLevel2: this.buildAmosChargeLevel2Report()
+      }
+    }
     return {
       chargeLevel2: this.buildChargeLevel2Report(),
       elementalSkill: this.buildElementalSkillReport(),
       elementalBurst: this.buildElementalBurstReport(),
+    }
+  }
+
+  buildAmosChargeLevel2Report() {
+    const [normalTalentLevel] = this.ganyuStats.talentLevels;
+    const stats = {
+      ...this.ganyuStats,
+      ratio: TALENT_GANYU.normal[normalTalentLevel].frostflakeArrow,
+    }
+    const frostflakeArrow = new Calculator(stats, this.targetStats).calculate()
+
+    const [, amosChargeAttackAdditionalBonus] = WEAPON_AMOS_BOW.refine[this.weaponStats.refineRank]
+    const amosArrowFlyBounsMaxTimes = 5;
+    const frostflakeTimeout = 0.35;
+    const frostflakeArrowFlyBonusTimes = parseInt((this.weaponStats.arrowFlyElapsed + frostflakeTimeout) / 0.1)
+    const amosArrowFlyElapsedBonus = max([frostflakeArrowFlyBonusTimes, amosArrowFlyBounsMaxTimes]) * amosChargeAttackAdditionalBonus;
+    const bloomStats = {
+      ...this.ganyuStats,
+      ratio: TALENT_GANYU.normal[normalTalentLevel].frostflakeArrowBloom,
+      damageBoost: {
+        ...this.ganyuStats.damageBoost,
+        other: round2(this.ganyuStats.damageBoost.other + amosArrowFlyElapsedBonus)
+      }
+    }
+
+    const frostflakeArrowBloom = new Calculator(bloomStats, this.targetStats).calculate()
+
+    return {
+      frostflakeArrow: {
+        damageExpectation: frostflakeArrow[0],
+        normalDamage: frostflakeArrow[1],
+        criticalDamage: frostflakeArrow[2]
+      },
+      frostflakeArrowBloom: {
+        damageExpectation: frostflakeArrowBloom[0],
+        normalDamage: frostflakeArrowBloom[1],
+        criticalDamage: frostflakeArrowBloom[2]
+      }
     }
   }
 
