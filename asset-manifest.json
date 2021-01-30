@@ -1,27 +1,27 @@
 {
   "files": {
     "main.css": "/genshin-impact-damage-helper/static/css/main.2f2ebecb.chunk.css",
-    "main.js": "/genshin-impact-damage-helper/static/js/main.5b34f9bf.chunk.js",
-    "main.js.map": "/genshin-impact-damage-helper/static/js/main.5b34f9bf.chunk.js.map",
+    "main.js": "/genshin-impact-damage-helper/static/js/main.54ec2aa1.chunk.js",
+    "main.js.map": "/genshin-impact-damage-helper/static/js/main.54ec2aa1.chunk.js.map",
     "runtime-main.js": "/genshin-impact-damage-helper/static/js/runtime-main.5fd16372.js",
     "runtime-main.js.map": "/genshin-impact-damage-helper/static/js/runtime-main.5fd16372.js.map",
     "static/css/2.f3f01324.chunk.css": "/genshin-impact-damage-helper/static/css/2.f3f01324.chunk.css",
-    "static/js/2.86596513.chunk.js": "/genshin-impact-damage-helper/static/js/2.86596513.chunk.js",
-    "static/js/2.86596513.chunk.js.map": "/genshin-impact-damage-helper/static/js/2.86596513.chunk.js.map",
+    "static/js/2.3d85290a.chunk.js": "/genshin-impact-damage-helper/static/js/2.3d85290a.chunk.js",
+    "static/js/2.3d85290a.chunk.js.map": "/genshin-impact-damage-helper/static/js/2.3d85290a.chunk.js.map",
     "static/js/3.79636b45.chunk.js": "/genshin-impact-damage-helper/static/js/3.79636b45.chunk.js",
     "static/js/3.79636b45.chunk.js.map": "/genshin-impact-damage-helper/static/js/3.79636b45.chunk.js.map",
     "index.html": "/genshin-impact-damage-helper/index.html",
     "static/css/2.f3f01324.chunk.css.map": "/genshin-impact-damage-helper/static/css/2.f3f01324.chunk.css.map",
     "static/css/main.2f2ebecb.chunk.css.map": "/genshin-impact-damage-helper/static/css/main.2f2ebecb.chunk.css.map",
-    "static/js/2.86596513.chunk.js.LICENSE.txt": "/genshin-impact-damage-helper/static/js/2.86596513.chunk.js.LICENSE.txt",
+    "static/js/2.3d85290a.chunk.js.LICENSE.txt": "/genshin-impact-damage-helper/static/js/2.3d85290a.chunk.js.LICENSE.txt",
     "static/media/alipay.a88338e8.jpg": "/genshin-impact-damage-helper/static/media/alipay.a88338e8.jpg",
     "static/media/wechat.89f6ae66.jpg": "/genshin-impact-damage-helper/static/media/wechat.89f6ae66.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.5fd16372.js",
     "static/css/2.f3f01324.chunk.css",
-    "static/js/2.86596513.chunk.js",
+    "static/js/2.3d85290a.chunk.js",
     "static/css/main.2f2ebecb.chunk.css",
-    "static/js/main.5b34f9bf.chunk.js"
+    "static/js/main.54ec2aa1.chunk.js"
   ]
 }
