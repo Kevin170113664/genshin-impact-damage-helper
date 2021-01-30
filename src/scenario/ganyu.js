@@ -24,6 +24,12 @@ export class Scenario {
 
   generateAmosScenarios() {
     const [amosChargeAttackBonus, amosChargeAttackAdditionalBonus] = WEAPON_AMOS_BOW.refine[this.weaponStats.refineRank]
+    const shatteringIceBonus = 0.15
+    const undividedHeartBonus = this.characterStats.level > 20 ? 0.2 : 0
+    const blizzardStrayerBonus = 0.2
+    const PassiveTalentBonus = this.characterStats.level > 70 ? 0.2 : 0;
+    const targetResistanceReduction = this.constellation >= 1 ? 0.15 : 0;
+
     const scenario1 = {
       description: '贴脸二段蓄力射，霜华矢不足0.1秒即击中敌人',
       characterStats: {
@@ -76,6 +82,27 @@ export class Scenario {
       }
     };
     const scenario4 = {
+      description: '蓄力二段吃满阿莫斯加成，怪物为冰附着(双冰共鸣，20突破天赋，冰套4)',
+      characterStats: {
+        ...this.characterStats,
+        attack: round0(this.basicAttack + this.additionalAttack),
+        criticalRatio: round2(this.characterStats.criticalRatio + shatteringIceBonus + undividedHeartBonus + blizzardStrayerBonus),
+        damageBoost: {
+          ...this.characterStats.damageBoost,
+          other: round2((this.characterStats.damageBoost.other || 0) + amosChargeAttackBonus + amosChargeAttackAdditionalBonus * 5)
+        }
+      },
+      targetStats: {
+        resistRatio: round2(0.1 - targetResistanceReduction)
+      },
+      weaponStats: {
+        name: WEAPON_AMOS_BOW.name,
+        refineRank: this.weaponStats.refineRank,
+        isChargedAttack: true,
+        arrowFlyElapsed: 0.5
+      }
+    };
+    const scenario6 = {
       description: '阿莫斯之弓对元素战技和元素爆发没有加成',
       characterStats: {
         ...this.characterStats,
@@ -87,7 +114,33 @@ export class Scenario {
       }
     };
 
-    return [scenario1, scenario2, scenario3, scenario4]
+    if (this.constellation >= 4) {
+      const forthConstellationMaxBonus = 0.25;
+      const scenario5 = {
+        description: '蓄力二段吃满阿莫斯加成，怪物为冰附着，站冰雨内吃满4命增伤(双冰共鸣，20突破天赋，冰套4)',
+        characterStats: {
+          ...this.characterStats,
+          attack: round0(this.basicAttack + this.additionalAttack),
+          criticalRatio: round2(this.characterStats.criticalRatio + shatteringIceBonus + undividedHeartBonus + blizzardStrayerBonus),
+          damageBoost: {
+            ...this.characterStats.damageBoost,
+            other: round2((this.characterStats.damageBoost.other || 0) + amosChargeAttackBonus + amosChargeAttackAdditionalBonus * 5 + PassiveTalentBonus + forthConstellationMaxBonus)
+          }
+        },
+        targetStats: {
+          resistRatio: round2(0.1 - targetResistanceReduction)
+        },
+        weaponStats: {
+          name: WEAPON_AMOS_BOW.name,
+          refineRank: this.weaponStats.refineRank,
+          isChargedAttack: true,
+          arrowFlyElapsed: 0.5
+        }
+      };
+      return [scenario1, scenario2, scenario3, scenario4, scenario5, scenario6]
+    }
+
+    return [scenario1, scenario2, scenario3, scenario4, scenario6]
   }
 
   generateCrescentScenarios() {
