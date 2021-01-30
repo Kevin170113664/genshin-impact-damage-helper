@@ -43,7 +43,7 @@ function App() {
 
   const scenarios = new Scenario(ganyuStats, weaponStats).generate();
   const reports = scenarios.map(scenario => {
-    const report = new Report(scenario.characterStats, scenario.targetStats).generate();
+    const report = new Report(scenario.characterStats, scenario.targetStats, scenario.weaponStats).generate();
     return {description: scenario.description, ...report}
   })
 

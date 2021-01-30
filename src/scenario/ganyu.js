@@ -34,6 +34,12 @@ export class Scenario {
           other: round2((this.characterStats.damageBoost.other || 0) + amosChargeAttackBonus)
         }
       },
+      weaponStats: {
+        name: WEAPON_AMOS_BOW.name,
+        refineRank: this.weaponStats.refineRank,
+        isChargedAttack: true,
+        arrowFlyElapsed: 0
+      }
     };
     const scenario2 = {
       description: '和怪的距离为一个冰雨半径，霜华矢吃2段加成，霜华绽放吃满5段加成',
@@ -45,6 +51,12 @@ export class Scenario {
           other: round2((this.characterStats.damageBoost.other || 0) + amosChargeAttackBonus + amosChargeAttackAdditionalBonus * 2)
         }
       },
+      weaponStats: {
+        name: WEAPON_AMOS_BOW.name,
+        refineRank: this.weaponStats.refineRank,
+        isChargedAttack: true,
+        arrowFlyElapsed: 0.2
+      }
     };
     const scenario3 = {
       description: '和怪的距离超过一个冰雨直径，二段蓄力射均吃满加成',
@@ -56,6 +68,12 @@ export class Scenario {
           other: round2((this.characterStats.damageBoost.other || 0) + amosChargeAttackBonus + amosChargeAttackAdditionalBonus * 5)
         }
       },
+      weaponStats: {
+        name: WEAPON_AMOS_BOW.name,
+        refineRank: this.weaponStats.refineRank,
+        isChargedAttack: true,
+        arrowFlyElapsed: 0.5
+      }
     };
     const scenario4 = {
       description: '阿莫斯之弓对元素战技和元素爆发没有加成',

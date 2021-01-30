@@ -1,5 +1,6 @@
 import {E} from '../constant/element';
 import {Scenario} from './ganyu';
+import {WEAPON_AMOS_BOW} from '../constant/weapon';
 
 describe('scenario', () => {
   test('should be able to generate 甘雨 scenario with prototype crescent', () => {
@@ -166,7 +167,7 @@ describe('scenario', () => {
     ])
   })
 
-  test('should be able to generate 甘雨 scenario with amos\' bow', () => {
+  test('should be able to generate 甘雨 scenario with amos bow', () => {
     const ganyuStats = {
       basicAttack: 943,
       additionalAttack: 1415,
@@ -200,6 +201,12 @@ describe('scenario', () => {
             [E.CRYO]: 0.616,
             other: 0.12
           }
+        },
+        weaponStats: {
+          name: WEAPON_AMOS_BOW.name,
+          refineRank: 1,
+          isChargedAttack: true,
+          arrowFlyElapsed: 0
         }
       },
       {
@@ -215,6 +222,12 @@ describe('scenario', () => {
             [E.CRYO]: 0.616,
             other: 0.28
           }
+        },
+        weaponStats: {
+          name: WEAPON_AMOS_BOW.name,
+          refineRank: 1,
+          isChargedAttack: true,
+          arrowFlyElapsed: 0.2
         }
       },
       {
@@ -230,6 +243,12 @@ describe('scenario', () => {
             [E.CRYO]: 0.616,
             other: 0.52
           }
+        },
+        weaponStats: {
+          name: WEAPON_AMOS_BOW.name,
+          refineRank: 1,
+          isChargedAttack: true,
+          arrowFlyElapsed: 0.5
         }
       },
       {
