@@ -108,4 +108,26 @@ describe('real damage calculator', () => {
     expect(normalDamage).toEqual(895.18);
     expect(criticalDamage).toEqual(1342.77);
   })
+
+  test('should be able to calculate first charge attack for 甘雨 with target cryo defence 15% lower', () => {
+    const GanyuStatistics = {
+      attack: 1000,
+      criticalRatio: 0.05,
+      criticalDamage: 0.5,
+      ratio: 1.24,
+      level: 90,
+      attackType: E.CRYO,
+      damageBoost: {cryo: 0.466}
+    };
+    const targetStatistics = {
+      level: 85,
+      resistRatio: -0.05
+    }
+
+    const [damageExpectation, normalDamage, criticalDamage] = new Calculator(GanyuStatistics, targetStatistics).calculate();
+
+    expect(damageExpectation).toEqual(967.67);
+    expect(normalDamage).toEqual(944.06);
+    expect(criticalDamage).toEqual(1416.10);
+  })
 })
