@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/genshin-impact-damage-helper/static/css/main.8c8b27cf.chunk.css",
+    "main.js": "/genshin-impact-damage-helper/static/js/main.63257b0f.chunk.js",
+    "main.js.map": "/genshin-impact-damage-helper/static/js/main.63257b0f.chunk.js.map",
+    "runtime-main.js": "/genshin-impact-damage-helper/static/js/runtime-main.220117cd.js",
+    "runtime-main.js.map": "/genshin-impact-damage-helper/static/js/runtime-main.220117cd.js.map",
+    "static/js/2.f62c2b64.chunk.js": "/genshin-impact-damage-helper/static/js/2.f62c2b64.chunk.js",
+    "static/js/2.f62c2b64.chunk.js.map": "/genshin-impact-damage-helper/static/js/2.f62c2b64.chunk.js.map",
+    "static/js/3.2c356e09.chunk.js": "/genshin-impact-damage-helper/static/js/3.2c356e09.chunk.js",
+    "static/js/3.2c356e09.chunk.js.map": "/genshin-impact-damage-helper/static/js/3.2c356e09.chunk.js.map",
+    "index.html": "/genshin-impact-damage-helper/index.html",
+    "static/css/main.8c8b27cf.chunk.css.map": "/genshin-impact-damage-helper/static/css/main.8c8b27cf.chunk.css.map",
+    "static/js/2.f62c2b64.chunk.js.LICENSE.txt": "/genshin-impact-damage-helper/static/js/2.f62c2b64.chunk.js.LICENSE.txt",
+    "static/media/logo.6ce24c58.svg": "/genshin-impact-damage-helper/static/media/logo.6ce24c58.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.220117cd.js",
+    "static/js/2.f62c2b64.chunk.js",
+    "static/css/main.8c8b27cf.chunk.css",
+    "static/js/main.63257b0f.chunk.js"
+  ]
+}
