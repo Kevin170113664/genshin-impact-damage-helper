@@ -18,6 +18,7 @@ function App() {
   const [normalTalent, setNormalTalent] = useState(11);
   const [skillTalent, setSkillTalent] = useState(3);
   const [burstTalent, setBurstTalent] = useState(6);
+  const [constellation, setConstellation] = useState(1);
   const [refineRank, setRefineRank] = useState(3);
 
   const ganyuStats = {
@@ -27,6 +28,7 @@ function App() {
     criticalDamage: criticalDamage / 100,
     level,
     mastery,
+    constellation,
     talentLevels: [normalTalent, skillTalent, burstTalent],
     damageBoost: {
       [E.CRYO]: cryoDamageBonus / 100
@@ -91,7 +93,7 @@ function App() {
       </div>
       <Row className="title constellation">命之座</Row>
       <div>
-        {renderOneRow('命之座', '0')}
+        {renderNumber('命之座', constellation, setConstellation, 0, 6)}
       </div>
       <Row className="title talent">天赋</Row>
       <div>
