@@ -14,12 +14,7 @@ describe('report', () => {
         [E.CRYO]: 0.616
       }
     };
-    const weaponStats = {
-      name: 'prototype_crescent',
-      level: 90,
-      refineRank: 3
-    };
-    const report = new Report(ganyuStats, weaponStats).generate();
+    const report = new Report(ganyuStats).generate();
 
     expect(report).toEqual({
       chargeLevel2: {

@@ -4,9 +4,8 @@ import {ATTACK_TYPE} from '../constant/attack-type';
 import {round2} from '../calculator/rounding';
 
 export class Report {
-  constructor(ganyuStats, weaponStats) {
+  constructor(ganyuStats) {
     this.ganyuStats = this.initCharacterStats(ganyuStats);
-    this.weaponStats = this.initWeaponStats(weaponStats)
     this.targetStats = {
       level: 85,
       resistRatio: 0.1
@@ -25,12 +24,6 @@ export class Report {
       talentLevels: [1, 1, 1],
       damageBoost: {},
       ...ganyuStats
-    };
-  }
-
-  initWeaponStats() {
-    return {
-      attack: 444,
     };
   }
 
