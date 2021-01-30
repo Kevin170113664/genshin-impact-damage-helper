@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
-import {Row, Col, InputNumber} from 'antd';
+import {Row, Col, InputNumber, Menu, Dropdown, Button} from 'antd';
 import DamageScenario from './component/DamageScenario';
 import {E} from './constant/element';
 import {Scenario} from './scenario/ganyu';
 import {Report} from './report/ganyu';
 import Coffee from './component/Coffee';
 import './App.css';
+import {WEAPON_AMOS_BOW, WEAPON_PROTOTYPE_CRESCENT} from './constant/weapon';
 
 function App() {
   const [level, setLevel] = useState(81);
@@ -20,6 +21,7 @@ function App() {
   const [burstTalent, setBurstTalent] = useState(6);
   const [constellation, setConstellation] = useState(1);
   const [refineRank, setRefineRank] = useState(3);
+  const [weaponName, setWeaponName] = useState(WEAPON_PROTOTYPE_CRESCENT.name);
 
   const ganyuStats = {
     basicAttack,
@@ -35,7 +37,7 @@ function App() {
     }
   };
   const weaponStats = {
-    name: 'prototype_crescent',
+    name: weaponName,
     refineRank
   };
 
@@ -44,13 +46,6 @@ function App() {
     const report = new Report(scenario.characterStats, scenario.targetStats).generate();
     return {description: scenario.description, ...report}
   })
-
-  function renderOneRow(title, value) {
-    return (<Row className="stat-row">
-      <Col span={3} offset={9}>{title}</Col>
-      <Col span={3} className='stat-value'>{value}</Col>
-    </Row>)
-  }
 
   function renderNumber(title, value, onChange, min, max, isPercentage) {
     if (isPercentage) {
@@ -65,12 +60,45 @@ function App() {
       )
     }
 
-    return (<Row className="stat-row">
-      <Col span={3} offset={9}>{title}</Col>
-      <Col span={3} className='stat-value'>
-        <InputNumber size="small" min={min} max={max} onChange={onChange} value={value}/>
-      </Col>
-    </Row>)
+    return (
+      <Row className="stat-row">
+        <Col span={3} offset={9}>{title}</Col>
+        <Col span={3} className='stat-value'>
+          <InputNumber size="small" min={min} max={max} onChange={onChange} value={value}/>
+        </Col>
+      </Row>
+    )
+  }
+
+  function onSelectWeapon({key}) {
+    setWeaponName(key)
+  }
+
+  function renderDropdown(title, weapon) {
+    const menu = (
+      <Menu onSelect={onSelectWeapon} onClick={onSelectWeapon}>
+        <Menu.Item key={WEAPON_PROTOTYPE_CRESCENT.name}>
+          试做澹月
+        </Menu.Item>
+        <Menu.Item key={WEAPON_AMOS_BOW.name}>
+          阿莫斯之弓
+        </Menu.Item>
+      </Menu>
+    );
+    const weaponLabel = {
+      [WEAPON_PROTOTYPE_CRESCENT.name]: WEAPON_PROTOTYPE_CRESCENT.label,
+      [WEAPON_AMOS_BOW.name]: WEAPON_AMOS_BOW.label
+    }
+    return (
+      <Row className="stat-row">
+        <Col span={3} offset={9}>{title}</Col>
+        <Col span={3} className='stat-value'>
+          <Dropdown overlay={menu} placement="bottomLeft">
+            <Button size="small">{weaponLabel[weaponName]}</Button>
+          </Dropdown>
+        </Col>
+      </Row>
+    )
   }
 
   return (
@@ -88,7 +116,7 @@ function App() {
       </div>
       <Row className="title weapon-stats">武器状态</Row>
       <div>
-        {renderOneRow('装备武器', '试做澹月')}
+        {renderDropdown('装备武器', '试做澹月')}
         {renderNumber('精炼等级', refineRank, setRefineRank, 1, 5)}
       </div>
       <Row className="title constellation">命之座</Row>

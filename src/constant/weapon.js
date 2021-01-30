@@ -1,4 +1,6 @@
 export const WEAPON_PROTOTYPE_CRESCENT = {
+  label: '试做澹月',
+  name: 'prototype_crescent',
   attack: {
     90: 510
   },
@@ -15,6 +17,7 @@ export const WEAPON_PROTOTYPE_CRESCENT = {
 }
 
 export const WEAPON_AMOS_BOW = {
+  label: '阿莫斯之弓',
   name: 'amos_bow',
   attack: {
     90: 608
