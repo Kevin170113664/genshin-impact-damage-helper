@@ -11,7 +11,7 @@ function App() {
 
   return (
     <div className="app">
-      <Row className="header">原神伤害计算小助手🐷</Row>
+      <Row className="header">甘雨伤害计算小助手🐷</Row>
       <Row className="title base-stats">人物基础数值</Row>
       <div>
         {renderOneRow('人物等级', '90')}
