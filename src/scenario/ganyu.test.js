@@ -252,6 +252,54 @@ describe('scenario', () => {
         }
       },
       {
+        description: '蓄力二段吃满阿莫斯加成，怪物为冰附着(双冰共鸣，20突破天赋，冰套4)',
+        characterStats: {
+          attack: 2358,
+          criticalRatio: 0.8,
+          criticalDamage: 2.4,
+          level: 90,
+          mastery: 0,
+          talentLevels: [11, 13, 13],
+          damageBoost: {
+            [E.CRYO]: 0.616,
+            other: 0.52
+          }
+        },
+        targetStats: {
+          resistRatio: -0.05
+        },
+        weaponStats: {
+          name: WEAPON_AMOS_BOW.name,
+          refineRank: 1,
+          isChargedAttack: true,
+          arrowFlyElapsed: 0.5
+        }
+      },
+      {
+        description: '蓄力二段吃满阿莫斯加成，怪物为冰附着，站冰雨内吃满4命增伤(双冰共鸣，20突破天赋，冰套4)',
+        characterStats: {
+          attack: 2358,
+          criticalRatio: 0.8,
+          criticalDamage: 2.4,
+          level: 90,
+          mastery: 0,
+          talentLevels: [11, 13, 13],
+          damageBoost: {
+            [E.CRYO]: 0.616,
+            other: 0.97
+          }
+        },
+        targetStats: {
+          resistRatio: -0.05
+        },
+        weaponStats: {
+          name: WEAPON_AMOS_BOW.name,
+          refineRank: 1,
+          isChargedAttack: true,
+          arrowFlyElapsed: 0.5
+        }
+      },
+      {
         description: '阿莫斯之弓对元素战技和元素爆发没有加成',
         characterStats: {
           attack: 2358,
