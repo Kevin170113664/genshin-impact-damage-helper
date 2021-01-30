@@ -9,19 +9,19 @@ import './App.css';
 import {WEAPON_AMOS_BOW, WEAPON_PROTOTYPE_CRESCENT} from './constant/weapon';
 
 function App() {
-  const [level, setLevel] = useState(81);
-  const [basicAttack, setBasicAttack] = useState(823);
-  const [additionalAttack, setAdditionalAttack] = useState(1215);
+  const [level, setLevel] = useState(90);
+  const [basicAttack, setBasicAttack] = useState(943);
+  const [additionalAttack, setAdditionalAttack] = useState(1445);
   const [mastery, setMastery] = useState(0);
-  const [criticalRatio, setCriticalRatio] = useState(19);
-  const [criticalDamage, setCriticalDamage] = useState(219.8);
+  const [criticalRatio, setCriticalRatio] = useState(25);
+  const [criticalDamage, setCriticalDamage] = useState(240);
   const [cryoDamageBonus, setCryoDamageBonus] = useState(61.6);
   const [normalTalent, setNormalTalent] = useState(11);
-  const [skillTalent, setSkillTalent] = useState(3);
-  const [burstTalent, setBurstTalent] = useState(6);
-  const [constellation, setConstellation] = useState(1);
-  const [refineRank, setRefineRank] = useState(3);
-  const [weaponName, setWeaponName] = useState(WEAPON_PROTOTYPE_CRESCENT.name);
+  const [skillTalent, setSkillTalent] = useState(13);
+  const [burstTalent, setBurstTalent] = useState(13);
+  const [constellation, setConstellation] = useState(6);
+  const [refineRank, setRefineRank] = useState(5);
+  const [weaponName, setWeaponName] = useState(WEAPON_AMOS_BOW.name);
 
   const ganyuStats = {
     basicAttack,
