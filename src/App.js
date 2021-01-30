@@ -5,8 +5,8 @@ import './App.css';
 function App() {
   function renderOneRow(title, value) {
     return (<Row className="stat-row">
-      <Col span={12}>{title}</Col>
-      <Col span={12} className='stat-value'>{value}</Col>
+      <Col span={3} offset={9}>{title}</Col>
+      <Col span={3} className='stat-value'>{value}</Col>
     </Row>)
   }
 
@@ -15,12 +15,12 @@ function App() {
       <Row className="header">甘雨伤害计算小助手🐷</Row>
       <Row className="title base-stats">人物基础数值</Row>
       <div>
-        {renderOneRow('人物等级', '90')}
-        {renderOneRow('攻击力', '1000')}
+        {renderOneRow('人物等级', '81')}
+        {renderOneRow('攻击力', '2082')}
         {renderOneRow('元素精通', '0')}
-        {renderOneRow('暴击率', '5%')}
-        {renderOneRow('暴击伤害', '50%')}
-        {renderOneRow('冰元素伤害加成', '46.6%')}
+        {renderOneRow('暴击率', '19%')}
+        {renderOneRow('暴击伤害', '219.8%')}
+        {renderOneRow('冰元素伤害加成', '61.6%')}
         {renderOneRow('物理伤害加成', '0%')}
       </div>
       <Row className="title weapon-stats">武器基础数值</Row>
@@ -34,7 +34,7 @@ function App() {
       </div>
       <Row className="title constellation">命之座</Row>
       <div>
-        {renderOneRow('命之座', '1')}
+        {renderOneRow('命之座', '0')}
       </div>
       <Row className="title talent">天赋</Row>
       <div>
@@ -42,7 +42,6 @@ function App() {
         {renderOneRow('元素战技', '3')}
         {renderOneRow('元素爆发', '6')}
       </div>
-      <Row className="title damage-report">伤害计算结果</Row>
       <DamageScenario/>
     </div>
   );
