@@ -61,7 +61,7 @@ describe('report', () => {
     })
   })
 
-  test('should be able to generate 甘雨 damage report with amos bow', () => {
+  test('should be able to generate 甘雨 damage report with amos bow charged attack', () => {
     const ganyuStats = {
       attack: 2500,
       criticalRatio: 0.25,
@@ -99,6 +99,57 @@ describe('report', () => {
           normalDamage: 10056.72
         }
       },
+    })
+  })
+
+  test('should be able to generate 甘雨 damage report with amos bow elemental skill/burst', () => {
+    const ganyuStats = {
+      attack: 2500,
+      criticalRatio: 0.25,
+      criticalDamage: 2.4,
+      level: 90,
+      mastery: 0,
+      talentLevels: [11, 13, 13],
+      damageBoost: {
+        [E.CRYO]: 0.616,
+        other: 0.12
+      }
+    };
+    const targetStats = {
+      level: 85,
+      resistRatio: 0.1
+    }
+    const weaponStats = {
+      name: WEAPON_AMOS_BOW.name,
+      refineRank: 1,
+    };
+    const report = new Report(ganyuStats, targetStats, weaponStats).generate();
+
+    expect(report).toEqual({
+      elementalBurst: {
+        allIceShard: {
+          criticalDamage: 511316.82,
+          damageExpectation: 240619.53,
+          normalDamage: 150387.27
+        },
+        singleIceShard: {
+          criticalDamage: 10025.82,
+          damageExpectation: 4718.03,
+          normalDamage: 2948.77
+        }
+      },
+      elementalSkill: {
+        '1-hit': {
+          criticalDamage: 18907.75,
+          damageExpectation: 8897.76,
+          normalDamage: 5561.1
+        },
+        '2-hit': {
+          criticalDamage: 18907.75,
+          damageExpectation: 8897.76,
+          normalDamage: 5561.1
+        }
+      }
     })
   })
 })

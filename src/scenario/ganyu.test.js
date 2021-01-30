@@ -263,6 +263,10 @@ describe('scenario', () => {
           damageBoost: {
             [E.CRYO]: 0.616
           }
+        },
+        weaponStats: {
+          name: WEAPON_AMOS_BOW.name,
+          refineRank: 1
         }
       }
     ])

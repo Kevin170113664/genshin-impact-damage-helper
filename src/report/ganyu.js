@@ -43,9 +43,15 @@ export class Report {
   }
 
   generate() {
-    if (this.weaponStats.name === WEAPON_AMOS_BOW.name && this.weaponStats.isChargedAttack) {
+    if (this.weaponStats.name === WEAPON_AMOS_BOW.name) {
+      if (this.weaponStats.isChargedAttack) {
+        return {
+          chargeLevel2: this.buildAmosChargeLevel2Report()
+        }
+      }
       return {
-        chargeLevel2: this.buildAmosChargeLevel2Report()
+        elementalSkill: this.buildElementalSkillReport(),
+        elementalBurst: this.buildElementalBurstReport(),
       }
     }
     return {

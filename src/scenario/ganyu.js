@@ -80,6 +80,10 @@ export class Scenario {
       characterStats: {
         ...this.characterStats,
         attack: round0(this.basicAttack + this.additionalAttack),
+      },
+      weaponStats: {
+        name: WEAPON_AMOS_BOW.name,
+        refineRank: this.weaponStats.refineRank
       }
     };
 

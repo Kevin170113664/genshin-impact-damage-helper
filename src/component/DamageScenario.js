@@ -40,50 +40,58 @@ function DamageScenario({reports}) {
 
   function renderTable(report, index) {
     const {chargeLevel2, elementalSkill, elementalBurst} = report;
-    const dataSource = [
-      {
+
+    const dataSource = []
+    if (chargeLevel2) {
+      dataSource.push({
         key: '1',
         criticalDamage: chargeLevel2.frostflakeArrow.criticalDamage,
         damageExpectation: chargeLevel2.frostflakeArrow.damageExpectation,
         normalDamage: chargeLevel2.frostflakeArrow.normalDamage,
         tags: ['二段蓄力霜华矢'],
-      },
-      {
+      })
+      dataSource.push({
         key: '2',
         criticalDamage: chargeLevel2.frostflakeArrowBloom.criticalDamage,
         damageExpectation: chargeLevel2.frostflakeArrowBloom.damageExpectation,
         normalDamage: chargeLevel2.frostflakeArrowBloom.normalDamage,
         tags: ['二段蓄力霜华绽放'],
-      },
-      {
+      })
+    }
+
+    if (elementalSkill) {
+      dataSource.push({
         key: '3',
         criticalDamage: elementalSkill['1-hit'].criticalDamage,
         damageExpectation: elementalSkill['1-hit'].damageExpectation,
         normalDamage: elementalSkill['1-hit'].normalDamage,
         tags: ['施放元素战技'],
-      },
-      {
+      })
+      dataSource.push({
         key: '4',
         criticalDamage: elementalSkill['2-hit'].criticalDamage,
         damageExpectation: elementalSkill['2-hit'].damageExpectation,
         normalDamage: elementalSkill['2-hit'].normalDamage,
         tags: ['冰莲爆炸'],
-      },
-      {
+      })
+    }
+
+    if (elementalBurst) {
+      dataSource.push({
         key: '5',
         criticalDamage: elementalBurst.singleIceShard.criticalDamage,
         damageExpectation: elementalBurst.singleIceShard.damageExpectation,
         normalDamage: elementalBurst.singleIceShard.normalDamage,
         tags: ['元素爆发1根冰棱伤害'],
-      },
-      {
+      })
+      dataSource.push(      {
         key: '6',
         criticalDamage: elementalBurst.allIceShard.criticalDamage,
         damageExpectation: elementalBurst.allIceShard.damageExpectation,
         normalDamage: elementalBurst.allIceShard.normalDamage,
         tags: ['元素爆发51根冰棱总伤害'],
-      },
-    ];
+      })
+    }
 
     return (
       <div key={index.toString()}>
