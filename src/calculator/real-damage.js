@@ -11,9 +11,9 @@ export class Calculator {
     this.criticalDamage = criticalDamage;
     this.ratio = ratio;
     this.level = level;
-    this.damageBoost = this.initDamageBoost(damageBoost);
 
-    this.target = targetStatistics
+    this.damageBoost = this.initDamageBoost(damageBoost);
+    this.target = this.initTargetStatistics(targetStatistics)
   }
 
   calculate() {
@@ -28,11 +28,12 @@ export class Calculator {
   }
 
   get levelMultiplier() {
+    const baseLevelMultiplier = (this.level + 100) / (this.level + 100 + (this.target.level + 100) * this.target.defence);
     if (this.target.level - this.level >= 70 && this.level <= 10) {
-      return (this.level + 100) / (this.level + this.target.level + 200) * 0.5
+      return baseLevelMultiplier * 0.5
     }
 
-    return (this.level + 100) / (this.level + this.target.level + 200)
+    return baseLevelMultiplier
   }
 
   get damageBoostMultiplier() {
@@ -67,6 +68,16 @@ export class Calculator {
       physical: 0,
       other: 0,
       ...damageBoost
+    }
+  }
+
+  initTargetStatistics(targetStatistics) {
+    return {
+      level: 100,
+      defence: 1,
+      resistRatio: 0.1,
+      attachedElement: undefined,
+      ...targetStatistics
     }
   }
 }
