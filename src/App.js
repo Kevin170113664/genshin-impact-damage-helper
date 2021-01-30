@@ -15,6 +15,10 @@ function App() {
   const [criticalRatio, setCriticalRatio] = useState(19);
   const [criticalDamage, setCriticalDamage] = useState(219.8);
   const [cryoDamageBonus, setCryoDamageBonus] = useState(61.6);
+  const [normalTalent, setNormalTalent] = useState(11);
+  const [skillTalent, setSkillTalent] = useState(3);
+  const [burstTalent, setBurstTalent] = useState(6);
+  const [refineRank, setRefineRank] = useState(3);
 
   const ganyuStats = {
     basicAttack,
@@ -23,15 +27,14 @@ function App() {
     criticalDamage: criticalDamage / 100,
     level,
     mastery,
-    talentLevels: [11, 3, 6],
+    talentLevels: [normalTalent, skillTalent, burstTalent],
     damageBoost: {
       [E.CRYO]: cryoDamageBonus / 100
     }
   };
   const weaponStats = {
     name: 'prototype_crescent',
-    level: 90,
-    refineRank: 3
+    refineRank
   };
 
   const scenarios = new Scenario(ganyuStats, weaponStats).generate();
@@ -84,7 +87,7 @@ function App() {
       <Row className="title weapon-stats">武器状态</Row>
       <div>
         {renderOneRow('装备武器', '试做澹月')}
-        {renderOneRow('精炼等级', '3')}
+        {renderNumber('精炼等级', refineRank, setRefineRank, 1, 5)}
       </div>
       <Row className="title constellation">命之座</Row>
       <div>
@@ -92,9 +95,9 @@ function App() {
       </div>
       <Row className="title talent">天赋</Row>
       <div>
-        {renderOneRow('普通攻击', '11')}
-        {renderOneRow('元素战技', '3')}
-        {renderOneRow('元素爆发', '6')}
+        {renderNumber('普通攻击', normalTalent, setNormalTalent, 1, 11)}
+        {renderNumber('元素战技', skillTalent, setSkillTalent, 1, 13)}
+        {renderNumber('元素爆发', burstTalent, setBurstTalent, 1, 13)}
       </div>
       <DamageScenario reports={reports}/>
     </div>
