@@ -1,7 +1,7 @@
 import { Layout, Row } from 'antd';
 import './App.css';
 
-const { Header, Footer, Sider, Content } = Layout;
+const { Header, Content } = Layout;
 
 function App() {
   return (
