@@ -19,11 +19,10 @@ export class Scenario {
 
     return [
       {
-        description: '发动试做澹月特效前(双冰共鸣)',
+        description: '发动试做澹月特效前',
         characterStats: {
           ...this.characterStats,
           attack: this.basicAttack + this.additionalAttack,
-          criticalRatio: round2(this.characterStats.criticalRatio + shatteringIceBonus)
         }
       },
       {
