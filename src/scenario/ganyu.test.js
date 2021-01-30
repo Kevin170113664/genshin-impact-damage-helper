@@ -2,7 +2,7 @@ import {E} from '../constant/element';
 import {Scenario} from './ganyu';
 
 describe('scenario', () => {
-  test('should be able to generate 甘雨 scenario with prototype crescent', () => {
+  test('should be able to generate 甘雨 scenario with prototype crescent and 20 ascension done', () => {
     const ganyuStats = {
       basicAttack: 823,
       additionalAttack: 1215,
@@ -41,7 +41,7 @@ describe('scenario', () => {
         description: '发动试做澹月特效后',
         characterStats: {
           attack: 2482,
-          criticalRatio: 0.19,
+          criticalRatio: 0.39,
           criticalDamage: 2.198,
           level: 81,
           mastery: 0,

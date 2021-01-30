@@ -1,10 +1,11 @@
+import React, {useState} from 'react';
 import {Row, Col} from 'antd';
 import DamageScenario from './component/DamageScenario';
-import './App.css';
 import {E} from './constant/element';
 import {Scenario} from './scenario/ganyu';
 import {Report} from './report/ganyu';
 import Coffee from './component/Coffee';
+import './App.css';
 
 function App() {
   const ganyuStats = {

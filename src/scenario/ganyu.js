@@ -13,20 +13,22 @@ export class Scenario {
 
   generate() {
     const attackIncreaseRatio = WEAPON_PROTOTYPE_CRESCENT.refine[this.weaponStats.refineRank]
+    const undividedHeartBonus = this.characterStats.level > 20 ? 0.2 : 0
 
     return [
       {
         description: '发动试做澹月特效前',
         characterStats: {
-          attack: this.basicAttack + this.additionalAttack,
           ...this.characterStats,
+          attack: this.basicAttack + this.additionalAttack,
         }
       },
       {
         description: '发动试做澹月特效后',
         characterStats: {
-          attack: round0(this.basicAttack * (1 + attackIncreaseRatio) + this.additionalAttack),
           ...this.characterStats,
+          attack: round0(this.basicAttack * (1 + attackIncreaseRatio) + this.additionalAttack),
+          criticalRatio: this.characterStats.criticalRatio + undividedHeartBonus
         }
       }
     ]
