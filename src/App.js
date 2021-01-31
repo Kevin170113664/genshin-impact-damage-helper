@@ -6,7 +6,7 @@ import {Scenario} from './scenario/ganyu';
 import {Report} from './report/ganyu';
 import Coffee from './component/Coffee';
 import './App.css';
-import {WEAPON_AMOS_BOW, WEAPON_PROTOTYPE_CRESCENT} from './constant/weapon';
+import {WEAPON_AMOS_BOW, WEAPON_PROTOTYPE_CRESCENT, WEAPON_SKYWARD_HARP} from './constant/weapon';
 
 function App() {
   const [level, setLevel] = useState(90);
@@ -74,20 +74,18 @@ function App() {
     setWeaponName(key)
   }
 
-  function renderDropdown(title, weapon) {
+  function renderDropdown(title) {
     const menu = (
       <Menu onSelect={onSelectWeapon} onClick={onSelectWeapon}>
-        <Menu.Item key={WEAPON_PROTOTYPE_CRESCENT.name}>
-          试做澹月
-        </Menu.Item>
-        <Menu.Item key={WEAPON_AMOS_BOW.name}>
-          阿莫斯之弓
-        </Menu.Item>
+        <Menu.Item key={WEAPON_AMOS_BOW.name}>{WEAPON_AMOS_BOW.label}</Menu.Item>
+        <Menu.Item key={WEAPON_SKYWARD_HARP.name}>{WEAPON_SKYWARD_HARP.label}</Menu.Item>
+        <Menu.Item key={WEAPON_PROTOTYPE_CRESCENT.name}>{WEAPON_PROTOTYPE_CRESCENT.label}</Menu.Item>
       </Menu>
     );
     const weaponLabel = {
       [WEAPON_PROTOTYPE_CRESCENT.name]: WEAPON_PROTOTYPE_CRESCENT.label,
-      [WEAPON_AMOS_BOW.name]: WEAPON_AMOS_BOW.label
+      [WEAPON_AMOS_BOW.name]: WEAPON_AMOS_BOW.label,
+      [WEAPON_SKYWARD_HARP.name]: WEAPON_SKYWARD_HARP.label
     }
     return (
       <Row className="stat-row">
