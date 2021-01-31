@@ -1,8 +1,3 @@
-.footer {
-    text-align: center;
-    padding: 50px 0
-}
-
 thead, table, td, tr, th {
     background: #474646 !important;
     color: #ffffff !important;
@@ -12,6 +7,14 @@ td {
     color: #0efae1 !important;
 }
 
+.damage-scenario {
+    font-size: 0.8em
+}
+
 .table-description {
     padding: 20px 20px 0 20px
+}
+
+.scenario-table {
+    padding-bottom: 20px;
 }

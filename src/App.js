@@ -51,8 +51,8 @@ function App() {
     if (isPercentage) {
       return (
         <Row className="stat-row">
-          <Col span={3} offset={9}>{title}</Col>
-          <Col span={3} className='stat-value'>
+          <Col span={12}>{title}</Col>
+          <Col span={6} className='stat-value'>
             <InputNumber size="small" min={min} max={max} onChange={onChange} value={value}
                          formatter={value => `${value}%`} parser={value => value.replace('%', '')}/>
           </Col>
@@ -62,8 +62,8 @@ function App() {
 
     return (
       <Row className="stat-row">
-        <Col span={3} offset={9}>{title}</Col>
-        <Col span={3} className='stat-value'>
+        <Col span={12}>{title}</Col>
+        <Col span={6} className='stat-value'>
           <InputNumber size="small" min={min} max={max} onChange={onChange} value={value}/>
         </Col>
       </Row>
@@ -89,8 +89,8 @@ function App() {
     }
     return (
       <Row className="stat-row">
-        <Col span={3} offset={9}>{title}</Col>
-        <Col span={3} className='stat-value'>
+        <Col span={12}>{title}</Col>
+        <Col span={6} className='stat-value'>
           <Dropdown overlay={menu} placement="bottomLeft">
             <Button size="small">{weaponLabel[weaponName]}</Button>
           </Dropdown>
@@ -102,32 +102,39 @@ function App() {
   return (
     <div className="app">
       <Row className="header">甘雨伤害计算小助手🐷<Coffee/></Row>
-      <Row className="title base-stats">人物状态</Row>
-      <div>
-        {renderNumber('人物等级', level, setLevel, 1, 90)}
-        {renderNumber('基础攻击力(白字)', basicAttack, setBasicAttack, 1, 9999)}
-        {renderNumber('附加攻击力(绿字)', additionalAttack, setAdditionalAttack, 1, 9999)}
-        {renderNumber('元素精通', mastery, setMastery, 0, 9999)}
-        {renderNumber('暴击率', criticalRatio, setCriticalRatio, 5, 100, true)}
-        {renderNumber('暴击伤害', criticalDamage, setCriticalDamage, 50, 1000, true)}
-        {renderNumber('冰元素伤害加成', cryoDamageBonus, setCryoDamageBonus, 0, 1000, true)}
-      </div>
-      <Row className="title weapon-stats">武器状态</Row>
-      <div>
-        {renderDropdown('装备武器', '试做澹月')}
-        {renderNumber('精炼等级', refineRank, setRefineRank, 1, 5)}
-      </div>
-      <Row className="title constellation">命之座</Row>
-      <div>
-        {renderNumber('命之座', constellation, setConstellation, 0, 6)}
-      </div>
-      <Row className="title talent">天赋</Row>
-      <div>
-        {renderNumber('普通攻击', normalTalent, setNormalTalent, 1, 11)}
-        {renderNumber('元素战技', skillTalent, setSkillTalent, 1, 13)}
-        {renderNumber('元素爆发', burstTalent, setBurstTalent, 1, 13)}
-      </div>
-      <DamageScenario reports={reports}/>
+      <Row>
+        <Col lg={6} xs={24}>
+          <Row className="title base-stats">人物状态</Row>
+          <div>
+            {renderNumber('人物等级', level, setLevel, 1, 90)}
+            {renderNumber('基础攻击力(白字)', basicAttack, setBasicAttack, 1, 9999)}
+            {renderNumber('附加攻击力(绿字)', additionalAttack, setAdditionalAttack, 1, 9999)}
+            {renderNumber('元素精通', mastery, setMastery, 0, 9999)}
+            {renderNumber('暴击率', criticalRatio, setCriticalRatio, 5, 100, true)}
+            {renderNumber('暴击伤害', criticalDamage, setCriticalDamage, 50, 1000, true)}
+            {renderNumber('冰元素伤害加成', cryoDamageBonus, setCryoDamageBonus, 0, 1000, true)}
+          </div>
+          <Row className="title weapon-stats">武器状态</Row>
+          <div>
+            {renderDropdown('装备武器', '试做澹月')}
+            {renderNumber('精炼等级', refineRank, setRefineRank, 1, 5)}
+          </div>
+          <Row className="title constellation">命之座</Row>
+          <div>
+            {renderNumber('命之座', constellation, setConstellation, 0, 6)}
+          </div>
+          <Row className="title talent">天赋</Row>
+          <div>
+            {renderNumber('普通攻击', normalTalent, setNormalTalent, 1, 11)}
+            {renderNumber('元素战技', skillTalent, setSkillTalent, 1, 13)}
+            {renderNumber('元素爆发', burstTalent, setBurstTalent, 1, 13)}
+          </div>
+        </Col>
+        <Col lg={18} xs={24}>
+          <DamageScenario reports={reports}/>
+        </Col>
+      </Row>
+      <div className="footer">这计算器依然是一个未成熟的作品，请勿传播哟</div>
     </div>
   );
 }

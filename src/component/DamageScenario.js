@@ -94,20 +94,19 @@ function DamageScenario({reports}) {
     }
 
     return (
-      <div key={index.toString()}>
+      <Col lg={12} xs={24} key={index.toString()}>
         <Row justify="center" className="table-description">{report.description}</Row>
-        <Row justify="center">
+        <Row justify="center" className="scenario-table">
           <Table columns={columns} dataSource={dataSource} pagination={false} size="small"/>
         </Row>
-      </div>
+      </Col>
     )
   }
 
   return (
-    <div className="damage-scenario">
+    <Row className="damage-scenario">
       {map(reports, (report, index) => renderTable(report, index))}
-      <div className="footer">这计算器依然是一个未成熟的作品，请勿传播哟</div>
-    </div>
+    </Row>
   );
 }
 
