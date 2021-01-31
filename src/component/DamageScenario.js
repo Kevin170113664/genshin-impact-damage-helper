@@ -48,14 +48,14 @@ function DamageScenario({reports}) {
         criticalDamage: chargeLevel2.frostflakeArrow.criticalDamage,
         damageExpectation: chargeLevel2.frostflakeArrow.damageExpectation,
         normalDamage: chargeLevel2.frostflakeArrow.normalDamage,
-        tags: ['二段蓄力霜华矢'],
+        tags: ['霜华矢'],
       })
       dataSource.push({
         key: '2',
         criticalDamage: chargeLevel2.frostflakeArrowBloom.criticalDamage,
         damageExpectation: chargeLevel2.frostflakeArrowBloom.damageExpectation,
         normalDamage: chargeLevel2.frostflakeArrowBloom.normalDamage,
-        tags: ['二段蓄力霜华绽放'],
+        tags: ['霜华绽放'],
       })
     }
 
@@ -65,7 +65,7 @@ function DamageScenario({reports}) {
         criticalDamage: elementalSkill['1-hit'].criticalDamage,
         damageExpectation: elementalSkill['1-hit'].damageExpectation,
         normalDamage: elementalSkill['1-hit'].normalDamage,
-        tags: ['施放元素战技'],
+        tags: ['释放冰莲'],
       })
       dataSource.push({
         key: '4',
@@ -82,14 +82,14 @@ function DamageScenario({reports}) {
         criticalDamage: elementalBurst.singleIceShard.criticalDamage,
         damageExpectation: elementalBurst.singleIceShard.damageExpectation,
         normalDamage: elementalBurst.singleIceShard.normalDamage,
-        tags: ['元素爆发1根冰棱'],
+        tags: ['冰雨1根冰棱'],
       })
       dataSource.push(      {
         key: '6',
         criticalDamage: elementalBurst.allIceShard.criticalDamage,
         damageExpectation: elementalBurst.allIceShard.damageExpectation,
         normalDamage: elementalBurst.allIceShard.normalDamage,
-        tags: ['元素爆发51根冰棱'],
+        tags: ['冰雨51根冰棱'],
       })
     }
 
