@@ -1,6 +1,6 @@
 import {E} from '../constant/element';
 import {Scenario} from './ganyu';
-import {WEAPON_AMOS_BOW} from '../constant/weapon';
+import {WEAPON_AMOS_BOW, WEAPON_SKYWARD_HARP} from '../constant/weapon';
 
 describe('scenario', () => {
   test('should be able to generate 甘雨 scenario with prototype crescent', () => {
@@ -182,7 +182,7 @@ describe('scenario', () => {
       }
     };
     const weaponStats = {
-      name: 'amos_bow',
+      name: WEAPON_AMOS_BOW,
       refineRank: 1
     };
     const scenarios = new Scenario(ganyuStats, weaponStats).generate();
@@ -315,6 +315,79 @@ describe('scenario', () => {
         weaponStats: {
           name: WEAPON_AMOS_BOW.name,
           refineRank: 1
+        }
+      }
+    ])
+  })
+
+  test('should be able to generate 甘雨 scenario with skyward harp', () => {
+    const ganyuStats = {
+      basicAttack: 1009,
+      additionalAttack: 1110,
+      criticalRatio: 0.45,
+      criticalDamage: 2.6,
+      level: 90,
+      mastery: 0,
+      constellation: 6,
+      talentLevels: [11, 13, 13],
+      damageBoost: {
+        [E.CRYO]: 0.616
+      }
+    };
+    const weaponStats = {
+      name: WEAPON_SKYWARD_HARP.name,
+      refineRank: 5
+    };
+    const scenarios = new Scenario(ganyuStats, weaponStats).generate();
+
+    expect(scenarios).toEqual([
+      {
+        description: '怪没有冰附着',
+        characterStats: {
+          attack: 2119,
+          criticalRatio: 0.45,
+          criticalDamage: 2.6,
+          level: 90,
+          mastery: 0,
+          talentLevels: [11, 13, 13],
+          damageBoost: {
+            [E.CRYO]: 0.616
+          }
+        }
+      },
+      {
+        description: '怪被冰元素附着(双冰共鸣，20突破天赋，冰套4)',
+        characterStats: {
+          attack: 2119,
+          criticalRatio: 1.00,
+          criticalDamage: 2.6,
+          level: 90,
+          mastery: 0,
+          talentLevels: [11, 13, 13],
+          damageBoost: {
+            [E.CRYO]: 0.616
+          }
+        },
+        targetStats: {
+          resistRatio: -0.05
+        }
+      },
+      {
+        description: '怪物被冰附着，站冰雨内吃满4命增伤(双冰共鸣，20突破天赋，冰套4)',
+        characterStats: {
+          attack: 2119,
+          criticalRatio: 1.00,
+          criticalDamage: 2.6,
+          level: 90,
+          mastery: 0,
+          talentLevels: [11, 13, 13],
+          damageBoost: {
+            [E.CRYO]: 0.616,
+            other: 0.45
+          }
+        },
+        targetStats: {
+          resistRatio: -0.05
         }
       }
     ])

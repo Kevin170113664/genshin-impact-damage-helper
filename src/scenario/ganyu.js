@@ -1,4 +1,4 @@
-import {WEAPON_AMOS_BOW, WEAPON_PROTOTYPE_CRESCENT} from '../constant/weapon';
+import {WEAPON_AMOS_BOW, WEAPON_PROTOTYPE_CRESCENT, WEAPON_SKYWARD_HARP} from '../constant/weapon';
 import {round0, round2} from '../calculator/rounding';
 import {E} from '../constant/element';
 
@@ -15,6 +15,10 @@ export class Scenario {
   }
 
   generate() {
+    if (this.weaponStats.name === WEAPON_SKYWARD_HARP.name) {
+      return this.generateSkywardScenarios()
+    }
+
     if (this.weaponStats.name === WEAPON_AMOS_BOW.name) {
       return this.generateAmosScenarios()
     }
@@ -22,11 +26,59 @@ export class Scenario {
     return this.generateCrescentScenarios();
   }
 
+  generateSkywardScenarios() {
+    const shatteringIceBonus = 0.15
+    const blizzardStrayerBonus = 0.2
+    const undividedHeartBonus = this.characterStats.level > 20 ? 0.2 : 0
+    const PassiveTalentBonus = this.characterStats.level > 70 ? 0.2 : 0;
+    const targetResistanceReduction = this.constellation >= 1 ? 0.15 : 0;
+
+    const scenario1 = {
+      description: '怪没有冰附着',
+      characterStats: {
+        ...this.characterStats,
+        attack: round0(this.basicAttack + this.additionalAttack),
+      },
+    };
+    const scenario2 = {
+      description: '怪被冰元素附着(双冰共鸣，20突破天赋，冰套4)',
+      characterStats: {
+        ...this.characterStats,
+        attack: round0(this.basicAttack + this.additionalAttack),
+        criticalRatio: round2(this.characterStats.criticalRatio + shatteringIceBonus + undividedHeartBonus + blizzardStrayerBonus)
+      },
+      targetStats: {
+        resistRatio: round2(0.1 - targetResistanceReduction)
+      }
+    };
+
+    if (this.constellation >= 4) {
+      const forthConstellationMaxBonus = 0.25;
+      const scenario3 = {
+        description: '怪物被冰附着，站冰雨内吃满4命增伤(双冰共鸣，20突破天赋，冰套4)',
+        characterStats: {
+          ...this.characterStats,
+          attack: round0(this.basicAttack + this.additionalAttack),
+          criticalRatio: round2(this.characterStats.criticalRatio + shatteringIceBonus + undividedHeartBonus + blizzardStrayerBonus),
+          damageBoost: {
+            ...this.characterStats.damageBoost,
+            other: round2((this.characterStats.damageBoost.other || 0) + PassiveTalentBonus + forthConstellationMaxBonus)
+          }
+        },
+        targetStats: {
+          resistRatio: round2(0.1 - targetResistanceReduction)
+        },
+      };
+      return [scenario1, scenario2, scenario3]
+    }
+    return [scenario1, scenario2]
+  }
+
   generateAmosScenarios() {
     const [amosChargeAttackBonus, amosChargeAttackAdditionalBonus] = WEAPON_AMOS_BOW.refine[this.weaponStats.refineRank]
     const shatteringIceBonus = 0.15
-    const undividedHeartBonus = this.characterStats.level > 20 ? 0.2 : 0
     const blizzardStrayerBonus = 0.2
+    const undividedHeartBonus = this.characterStats.level > 20 ? 0.2 : 0
     const PassiveTalentBonus = this.characterStats.level > 70 ? 0.2 : 0;
     const targetResistanceReduction = this.constellation >= 1 ? 0.15 : 0;
 
@@ -146,8 +198,8 @@ export class Scenario {
   generateCrescentScenarios() {
     const attackIncreaseRatio = WEAPON_PROTOTYPE_CRESCENT.refine[this.weaponStats.refineRank]
     const shatteringIceBonus = 0.15
-    const undividedHeartBonus = this.characterStats.level > 20 ? 0.2 : 0
     const blizzardStrayerBonus = 0.2
+    const undividedHeartBonus = this.characterStats.level > 20 ? 0.2 : 0
     const PassiveTalentBonus = this.characterStats.level > 70 ? 0.2 : 0;
     const targetResistanceReduction = this.constellation >= 1 ? 0.15 : 0;
 
