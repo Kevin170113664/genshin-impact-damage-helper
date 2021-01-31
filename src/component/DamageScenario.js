@@ -82,14 +82,14 @@ function DamageScenario({reports}) {
         criticalDamage: elementalBurst.singleIceShard.criticalDamage,
         damageExpectation: elementalBurst.singleIceShard.damageExpectation,
         normalDamage: elementalBurst.singleIceShard.normalDamage,
-        tags: ['元素爆发1根冰棱伤害'],
+        tags: ['元素爆发1根冰棱'],
       })
       dataSource.push(      {
         key: '6',
         criticalDamage: elementalBurst.allIceShard.criticalDamage,
         damageExpectation: elementalBurst.allIceShard.damageExpectation,
         normalDamage: elementalBurst.allIceShard.normalDamage,
-        tags: ['元素爆发51根冰棱总伤害'],
+        tags: ['元素爆发51根冰棱'],
       })
     }
 
