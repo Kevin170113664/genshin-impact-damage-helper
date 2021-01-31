@@ -1,6 +1,7 @@
 import {Row, Col, Table, Tag} from 'antd';
 import map from 'lodash/map'
 import './DamageScenario.css';
+import {round0} from '../calculator/rounding';
 
 function DamageScenario({reports}) {
   const columns = [
@@ -45,16 +46,16 @@ function DamageScenario({reports}) {
     if (chargeLevel2) {
       dataSource.push({
         key: '1',
-        criticalDamage: chargeLevel2.frostflakeArrow.criticalDamage,
-        damageExpectation: chargeLevel2.frostflakeArrow.damageExpectation,
-        normalDamage: chargeLevel2.frostflakeArrow.normalDamage,
+        criticalDamage: round0(chargeLevel2.frostflakeArrow.criticalDamage),
+        damageExpectation: round0(chargeLevel2.frostflakeArrow.damageExpectation),
+        normalDamage: round0(chargeLevel2.frostflakeArrow.normalDamage),
         tags: ['霜华矢'],
       })
       dataSource.push({
         key: '2',
-        criticalDamage: chargeLevel2.frostflakeArrowBloom.criticalDamage,
-        damageExpectation: chargeLevel2.frostflakeArrowBloom.damageExpectation,
-        normalDamage: chargeLevel2.frostflakeArrowBloom.normalDamage,
+        criticalDamage: round0(chargeLevel2.frostflakeArrowBloom.criticalDamage),
+        damageExpectation: round0(chargeLevel2.frostflakeArrowBloom.damageExpectation),
+        normalDamage: round0(chargeLevel2.frostflakeArrowBloom.normalDamage),
         tags: ['霜华绽放'],
       })
     }
@@ -62,16 +63,16 @@ function DamageScenario({reports}) {
     if (elementalSkill) {
       dataSource.push({
         key: '3',
-        criticalDamage: elementalSkill['1-hit'].criticalDamage,
-        damageExpectation: elementalSkill['1-hit'].damageExpectation,
-        normalDamage: elementalSkill['1-hit'].normalDamage,
+        criticalDamage: round0(elementalSkill['1-hit'].criticalDamage),
+        damageExpectation: round0(elementalSkill['1-hit'].damageExpectation),
+        normalDamage: round0(elementalSkill['1-hit'].normalDamage),
         tags: ['释放冰莲'],
       })
       dataSource.push({
         key: '4',
-        criticalDamage: elementalSkill['2-hit'].criticalDamage,
-        damageExpectation: elementalSkill['2-hit'].damageExpectation,
-        normalDamage: elementalSkill['2-hit'].normalDamage,
+        criticalDamage: round0(elementalSkill['2-hit'].criticalDamage),
+        damageExpectation: round0(elementalSkill['2-hit'].damageExpectation),
+        normalDamage: round0(elementalSkill['2-hit'].normalDamage),
         tags: ['冰莲爆炸'],
       })
     }
@@ -79,16 +80,16 @@ function DamageScenario({reports}) {
     if (elementalBurst) {
       dataSource.push({
         key: '5',
-        criticalDamage: elementalBurst.singleIceShard.criticalDamage,
-        damageExpectation: elementalBurst.singleIceShard.damageExpectation,
-        normalDamage: elementalBurst.singleIceShard.normalDamage,
+        criticalDamage: round0(elementalBurst.singleIceShard.criticalDamage),
+        damageExpectation: round0(elementalBurst.singleIceShard.damageExpectation),
+        normalDamage: round0(elementalBurst.singleIceShard.normalDamage),
         tags: ['冰雨1根冰棱'],
       })
       dataSource.push(      {
         key: '6',
-        criticalDamage: elementalBurst.allIceShard.criticalDamage,
-        damageExpectation: elementalBurst.allIceShard.damageExpectation,
-        normalDamage: elementalBurst.allIceShard.normalDamage,
+        criticalDamage: round0(elementalBurst.allIceShard.criticalDamage),
+        damageExpectation: round0(elementalBurst.allIceShard.damageExpectation),
+        normalDamage: round0(elementalBurst.allIceShard.normalDamage),
         tags: ['冰雨51根冰棱'],
       })
     }
