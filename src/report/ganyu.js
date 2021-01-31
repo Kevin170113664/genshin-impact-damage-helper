@@ -107,6 +107,7 @@ export class Report {
 
   buildChargeLevel2Report() {
     const [normalTalentLevel] = this.ganyuStats.talentLevels;
+    const targetResistanceReduction = this.ganyuStats.constellation >= 1 ? 0.15 : 0;
     const stats = {
       ...this.ganyuStats,
       ratio: TALENT_GANYU.normal[normalTalentLevel].frostflakeArrow,
@@ -115,8 +116,12 @@ export class Report {
       ...this.ganyuStats,
       ratio: TALENT_GANYU.normal[normalTalentLevel].frostflakeArrowBloom,
     }
+    const targetStats = {
+      ...this.targetStats,
+      resistRatio: round2(0.1 - targetResistanceReduction)
+    }
     const frostflakeArrow = new Calculator(stats, this.targetStats).calculate()
-    const frostflakeArrowBloom = new Calculator(bloomStats, this.targetStats).calculate()
+    const frostflakeArrowBloom = new Calculator(bloomStats, targetStats).calculate()
 
     return {
       frostflakeArrow: {

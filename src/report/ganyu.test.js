@@ -10,6 +10,7 @@ describe('report', () => {
       criticalDamage: 2.198,
       level: 81,
       mastery: 0,
+      constellation: 1,
       talentLevels: [11, 3, 6],
       damageBoost: {
         [E.CRYO]: 0.616
@@ -29,9 +30,9 @@ describe('report', () => {
           normalDamage: 3561.98
         },
         frostflakeArrowBloom: {
-          criticalDamage: 19360.39,
-          damageExpectation: 8582.14,
-          normalDamage: 6053.9
+          criticalDamage: 22049.33,
+          damageExpectation: 9774.1,
+          normalDamage: 6894.72
         }
       },
       elementalSkill: {
@@ -94,9 +95,9 @@ describe('report', () => {
           normalDamage: 7175.93
         },
         frostflakeArrowBloom: {
-          criticalDamage: 37400.17,
-          damageExpectation: 22700.95,
-          normalDamage: 12230.27
+          criticalDamage: 32839.18,
+          damageExpectation: 19932.54,
+          normalDamage: 10738.78
         }
       },
     })

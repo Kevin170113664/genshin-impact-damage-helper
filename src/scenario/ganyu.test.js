@@ -32,6 +32,7 @@ describe('scenario', () => {
           criticalDamage: 2.198,
           level: 81,
           mastery: 0,
+          constellation: 1,
           talentLevels: [11, 3, 6],
           damageBoost: {
             [E.CRYO]: 0.616
@@ -46,6 +47,7 @@ describe('scenario', () => {
           criticalDamage: 2.198,
           level: 81,
           mastery: 0,
+          constellation: 1,
           talentLevels: [11, 3, 6],
           damageBoost: {
             [E.CRYO]: 0.616
@@ -63,6 +65,7 @@ describe('scenario', () => {
           criticalDamage: 2.198,
           level: 81,
           mastery: 0,
+          constellation: 1,
           talentLevels: [11, 3, 6],
           damageBoost: {
             [E.CRYO]: 0.616,
@@ -105,6 +108,7 @@ describe('scenario', () => {
           criticalDamage: 2.198,
           level: 81,
           mastery: 0,
+          constellation: 4,
           talentLevels: [11, 3, 6],
           damageBoost: {
             [E.CRYO]: 0.616
@@ -119,6 +123,7 @@ describe('scenario', () => {
           criticalDamage: 2.198,
           level: 81,
           mastery: 0,
+          constellation: 4,
           talentLevels: [11, 3, 6],
           damageBoost: {
             [E.CRYO]: 0.616
@@ -136,6 +141,7 @@ describe('scenario', () => {
           criticalDamage: 2.198,
           level: 81,
           mastery: 0,
+          constellation: 4,
           talentLevels: [11, 3, 6],
           damageBoost: {
             [E.CRYO]: 0.616,
@@ -154,6 +160,7 @@ describe('scenario', () => {
           criticalDamage: 2.198,
           level: 81,
           mastery: 0,
+          constellation: 4,
           talentLevels: [11, 3, 6],
           damageBoost: {
             [E.CRYO]: 0.616,
@@ -196,6 +203,7 @@ describe('scenario', () => {
           criticalDamage: 2.058,
           level: 82,
           mastery: 0,
+          constellation: 6,
           talentLevels: [10, 13, 13],
           damageBoost: {
             [E.CRYO]: 0.616,
@@ -217,6 +225,7 @@ describe('scenario', () => {
           criticalDamage: 2.058,
           level: 82,
           mastery: 0,
+          constellation: 6,
           talentLevels: [10, 13, 13],
           damageBoost: {
             [E.CRYO]: 0.616,
@@ -238,6 +247,7 @@ describe('scenario', () => {
           criticalDamage: 2.058,
           level: 82,
           mastery: 0,
+          constellation: 6,
           talentLevels: [10, 13, 13],
           damageBoost: {
             [E.CRYO]: 0.616,
@@ -259,6 +269,7 @@ describe('scenario', () => {
           criticalDamage: 2.058,
           level: 82,
           mastery: 0,
+          constellation: 6,
           talentLevels: [10, 13, 13],
           damageBoost: {
             [E.CRYO]: 0.616,
@@ -283,6 +294,7 @@ describe('scenario', () => {
           criticalDamage: 2.058,
           level: 82,
           mastery: 0,
+          constellation: 6,
           talentLevels: [10, 13, 13],
           damageBoost: {
             [E.CRYO]: 0.616,
@@ -307,6 +319,7 @@ describe('scenario', () => {
           criticalDamage: 2.058,
           level: 82,
           mastery: 0,
+          constellation: 6,
           talentLevels: [10, 13, 13],
           damageBoost: {
             [E.CRYO]: 0.616
@@ -349,6 +362,7 @@ describe('scenario', () => {
           criticalDamage: 2.6,
           level: 90,
           mastery: 0,
+          constellation: 6,
           talentLevels: [11, 13, 13],
           damageBoost: {
             [E.CRYO]: 0.616
@@ -363,6 +377,7 @@ describe('scenario', () => {
           criticalDamage: 2.6,
           level: 90,
           mastery: 0,
+          constellation: 6,
           talentLevels: [11, 13, 13],
           damageBoost: {
             [E.CRYO]: 0.616
@@ -380,6 +395,7 @@ describe('scenario', () => {
           criticalDamage: 2.6,
           level: 90,
           mastery: 0,
+          constellation: 6,
           talentLevels: [11, 13, 13],
           damageBoost: {
             [E.CRYO]: 0.616,
