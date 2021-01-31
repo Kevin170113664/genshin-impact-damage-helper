@@ -6,7 +6,6 @@ export class Scenario {
     this.characterStats = {...characterStats};
     delete this.characterStats.basicAttack;
     delete this.characterStats.additionalAttack;
-    delete this.characterStats.constellation;
     this.basicAttack = characterStats.basicAttack;
     this.additionalAttack = characterStats.additionalAttack;
     this.constellation = characterStats.constellation;
