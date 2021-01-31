@@ -1,6 +1,5 @@
 import {WEAPON_AMOS_BOW, WEAPON_PROTOTYPE_CRESCENT, WEAPON_SKYWARD_HARP} from '../constant/weapon';
-import {round0, round2} from '../calculator/rounding';
-import {E} from '../constant/element';
+import {round0, round2, round3} from '../calculator/rounding';
 
 export class Scenario {
   constructor(characterStats, weaponStats) {
@@ -45,7 +44,7 @@ export class Scenario {
       characterStats: {
         ...this.characterStats,
         attack: round0(this.basicAttack + this.additionalAttack),
-        criticalRatio: round2(this.characterStats.criticalRatio + shatteringIceBonus + undividedHeartBonus + blizzardStrayerBonus)
+        criticalRatio: round3(this.characterStats.criticalRatio + shatteringIceBonus + undividedHeartBonus + blizzardStrayerBonus)
       },
       targetStats: {
         resistRatio: round2(0.1 - targetResistanceReduction)
@@ -59,7 +58,7 @@ export class Scenario {
         characterStats: {
           ...this.characterStats,
           attack: round0(this.basicAttack + this.additionalAttack),
-          criticalRatio: round2(this.characterStats.criticalRatio + shatteringIceBonus + undividedHeartBonus + blizzardStrayerBonus),
+          criticalRatio: round3(this.characterStats.criticalRatio + shatteringIceBonus + undividedHeartBonus + blizzardStrayerBonus),
           damageBoost: {
             ...this.characterStats.damageBoost,
             other: round2((this.characterStats.damageBoost.other || 0) + PassiveTalentBonus + forthConstellationMaxBonus)
@@ -138,7 +137,7 @@ export class Scenario {
       characterStats: {
         ...this.characterStats,
         attack: round0(this.basicAttack + this.additionalAttack),
-        criticalRatio: round2(this.characterStats.criticalRatio + shatteringIceBonus + undividedHeartBonus + blizzardStrayerBonus),
+        criticalRatio: round3(this.characterStats.criticalRatio + shatteringIceBonus + undividedHeartBonus + blizzardStrayerBonus),
         damageBoost: {
           ...this.characterStats.damageBoost,
           other: round2((this.characterStats.damageBoost.other || 0) + amosChargeAttackBonus + amosChargeAttackAdditionalBonus * 5)
@@ -173,7 +172,7 @@ export class Scenario {
         characterStats: {
           ...this.characterStats,
           attack: round0(this.basicAttack + this.additionalAttack),
-          criticalRatio: round2(this.characterStats.criticalRatio + shatteringIceBonus + undividedHeartBonus + blizzardStrayerBonus),
+          criticalRatio: round3(this.characterStats.criticalRatio + shatteringIceBonus + undividedHeartBonus + blizzardStrayerBonus),
           damageBoost: {
             ...this.characterStats.damageBoost,
             other: round2((this.characterStats.damageBoost.other || 0) + amosChargeAttackBonus + amosChargeAttackAdditionalBonus * 5 + PassiveTalentBonus + forthConstellationMaxBonus)
@@ -216,7 +215,7 @@ export class Scenario {
       characterStats: {
         ...this.characterStats,
         attack: round0(this.basicAttack * (1 + attackIncreaseRatio) + this.additionalAttack),
-        criticalRatio: round2(this.characterStats.criticalRatio + shatteringIceBonus + undividedHeartBonus + blizzardStrayerBonus),
+        criticalRatio: round3(this.characterStats.criticalRatio + shatteringIceBonus + undividedHeartBonus + blizzardStrayerBonus),
       },
       targetStats: {
         resistRatio: round2(0.1 - targetResistanceReduction)

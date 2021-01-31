@@ -169,21 +169,21 @@ describe('scenario', () => {
 
   test('should be able to generate 甘雨 scenario with amos bow', () => {
     const ganyuStats = {
-      basicAttack: 943,
-      additionalAttack: 1415,
-      criticalRatio: 0.25,
-      criticalDamage: 2.4,
-      level: 90,
+      basicAttack: 924,
+      additionalAttack: 1539,
+      criticalRatio: 0.416,
+      criticalDamage: 2.058,
+      level: 82,
       mastery: 0,
       constellation: 6,
-      talentLevels: [11, 13, 13],
+      talentLevels: [10, 13, 13],
       damageBoost: {
         [E.CRYO]: 0.616
       }
     };
     const weaponStats = {
-      name: WEAPON_AMOS_BOW,
-      refineRank: 1
+      name: WEAPON_AMOS_BOW.name,
+      refineRank: 4
     };
     const scenarios = new Scenario(ganyuStats, weaponStats).generate();
 
@@ -191,20 +191,20 @@ describe('scenario', () => {
       {
         description: '贴脸二段蓄力射，霜华矢不足0.1秒即击中敌人',
         characterStats: {
-          attack: 2358,
-          criticalRatio: 0.25,
-          criticalDamage: 2.4,
-          level: 90,
+          attack: 2463,
+          criticalRatio: 0.416,
+          criticalDamage: 2.058,
+          level: 82,
           mastery: 0,
-          talentLevels: [11, 13, 13],
+          talentLevels: [10, 13, 13],
           damageBoost: {
             [E.CRYO]: 0.616,
-            other: 0.12
+            other: 0.21
           }
         },
         weaponStats: {
           name: WEAPON_AMOS_BOW.name,
-          refineRank: 1,
+          refineRank: 4,
           isChargedAttack: true,
           arrowFlyElapsed: 0
         }
@@ -212,20 +212,20 @@ describe('scenario', () => {
       {
         description: '和怪的距离为一个冰雨半径，霜华矢吃2段加成，霜华绽放吃满5段加成',
         characterStats: {
-          attack: 2358,
-          criticalRatio: 0.25,
-          criticalDamage: 2.4,
-          level: 90,
+          attack: 2463,
+          criticalRatio: 0.416,
+          criticalDamage: 2.058,
+          level: 82,
           mastery: 0,
-          talentLevels: [11, 13, 13],
+          talentLevels: [10, 13, 13],
           damageBoost: {
             [E.CRYO]: 0.616,
-            other: 0.28
+            other: 0.49
           }
         },
         weaponStats: {
           name: WEAPON_AMOS_BOW.name,
-          refineRank: 1,
+          refineRank: 4,
           isChargedAttack: true,
           arrowFlyElapsed: 0.2
         }
@@ -233,20 +233,20 @@ describe('scenario', () => {
       {
         description: '和怪的距离超过一个冰雨直径，二段蓄力射均吃满加成',
         characterStats: {
-          attack: 2358,
-          criticalRatio: 0.25,
-          criticalDamage: 2.4,
-          level: 90,
+          attack: 2463,
+          criticalRatio: 0.416,
+          criticalDamage: 2.058,
+          level: 82,
           mastery: 0,
-          talentLevels: [11, 13, 13],
+          talentLevels: [10, 13, 13],
           damageBoost: {
             [E.CRYO]: 0.616,
-            other: 0.52
+            other: 0.91
           }
         },
         weaponStats: {
           name: WEAPON_AMOS_BOW.name,
-          refineRank: 1,
+          refineRank: 4,
           isChargedAttack: true,
           arrowFlyElapsed: 0.5
         }
@@ -254,15 +254,15 @@ describe('scenario', () => {
       {
         description: '蓄力二段吃满阿莫斯加成，怪物为冰附着(双冰共鸣，20突破天赋，冰套4)',
         characterStats: {
-          attack: 2358,
-          criticalRatio: 0.8,
-          criticalDamage: 2.4,
-          level: 90,
+          attack: 2463,
+          criticalRatio: 0.966,
+          criticalDamage: 2.058,
+          level: 82,
           mastery: 0,
-          talentLevels: [11, 13, 13],
+          talentLevels: [10, 13, 13],
           damageBoost: {
             [E.CRYO]: 0.616,
-            other: 0.52
+            other: 0.91
           }
         },
         targetStats: {
@@ -270,7 +270,7 @@ describe('scenario', () => {
         },
         weaponStats: {
           name: WEAPON_AMOS_BOW.name,
-          refineRank: 1,
+          refineRank: 4,
           isChargedAttack: true,
           arrowFlyElapsed: 0.5
         }
@@ -278,15 +278,15 @@ describe('scenario', () => {
       {
         description: '蓄力二段吃满阿莫斯加成，怪物为冰附着，站冰雨内吃满4命增伤(双冰共鸣，20突破天赋，冰套4)',
         characterStats: {
-          attack: 2358,
-          criticalRatio: 0.8,
-          criticalDamage: 2.4,
-          level: 90,
+          attack: 2463,
+          criticalRatio: 0.966,
+          criticalDamage: 2.058,
+          level: 82,
           mastery: 0,
-          talentLevels: [11, 13, 13],
+          talentLevels: [10, 13, 13],
           damageBoost: {
             [E.CRYO]: 0.616,
-            other: 0.97
+            other: 1.36
           }
         },
         targetStats: {
@@ -294,7 +294,7 @@ describe('scenario', () => {
         },
         weaponStats: {
           name: WEAPON_AMOS_BOW.name,
-          refineRank: 1,
+          refineRank: 4,
           isChargedAttack: true,
           arrowFlyElapsed: 0.5
         }
@@ -302,19 +302,19 @@ describe('scenario', () => {
       {
         description: '阿莫斯之弓对元素战技和元素爆发没有加成',
         characterStats: {
-          attack: 2358,
-          criticalRatio: 0.25,
-          criticalDamage: 2.4,
-          level: 90,
+          attack: 2463,
+          criticalRatio: 0.416,
+          criticalDamage: 2.058,
+          level: 82,
           mastery: 0,
-          talentLevels: [11, 13, 13],
+          talentLevels: [10, 13, 13],
           damageBoost: {
             [E.CRYO]: 0.616
           }
         },
         weaponStats: {
           name: WEAPON_AMOS_BOW.name,
-          refineRank: 1
+          refineRank: 4
         }
       }
     ])

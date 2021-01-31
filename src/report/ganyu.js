@@ -1,4 +1,4 @@
-import max from 'lodash/max';
+import min from 'lodash/min';
 import {Calculator} from '../calculator/real-damage';
 import {TALENT_GANYU} from '../constant/talent';
 import {ATTACK_TYPE} from '../constant/attack-type';
@@ -73,7 +73,7 @@ export class Report {
     const amosArrowFlyBounsMaxTimes = 5;
     const frostflakeTimeout = 0.35;
     const frostflakeArrowFlyBonusTimes = parseInt((this.weaponStats.arrowFlyElapsed + frostflakeTimeout) / 0.1)
-    const amosArrowFlyElapsedBonus = max([frostflakeArrowFlyBonusTimes, amosArrowFlyBounsMaxTimes]) * amosChargeAttackAdditionalBonus;
+    const amosArrowFlyElapsedBonus = (amosArrowFlyBounsMaxTimes - min([frostflakeArrowFlyBonusTimes, amosArrowFlyBounsMaxTimes])) * amosChargeAttackAdditionalBonus;
     const bloomStats = {
       ...this.ganyuStats,
       ratio: TALENT_GANYU.normal[normalTalentLevel].frostflakeArrowBloom,

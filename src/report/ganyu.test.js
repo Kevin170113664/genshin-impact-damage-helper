@@ -63,40 +63,40 @@ describe('report', () => {
 
   test('should be able to generate 甘雨 damage report with amos bow charged attack', () => {
     const ganyuStats = {
-      attack: 2500,
-      criticalRatio: 0.25,
-      criticalDamage: 2.4,
-      level: 90,
+      attack: 2463,
+      criticalRatio: 0.416,
+      criticalDamage: 2.058,
+      level: 82,
       mastery: 0,
-      talentLevels: [11, 13, 13],
+      talentLevels: [10, 13, 13],
       damageBoost: {
         [E.CRYO]: 0.616,
-        other: 0.12
+        other: 0.91
       }
     };
     const targetStats = {
-      level: 85,
-      resistRatio: 0.1
+      level: 90,
+      resistRatio: -0.05
     }
     const weaponStats = {
       name: WEAPON_AMOS_BOW.name,
-      refineRank: 1,
+      refineRank: 4,
       isChargedAttack: true,
-      arrowFlyElapsed: 0
+      arrowFlyElapsed: 0.5
     };
     const report = new Report(ganyuStats, targetStats, weaponStats).generate();
 
     expect(report).toEqual({
       chargeLevel2: {
         frostflakeArrow: {
-          criticalDamage: 16350.83,
-          damageExpectation: 7694.51,
-          normalDamage: 4809.07
+          criticalDamage: 21943.98,
+          damageExpectation: 13319.44,
+          normalDamage: 7175.93
         },
         frostflakeArrowBloom: {
-          criticalDamage: 34192.83,
-          damageExpectation: 16090.74,
-          normalDamage: 10056.72
+          criticalDamage: 37400.17,
+          damageExpectation: 22700.95,
+          normalDamage: 12230.27
         }
       },
     })
