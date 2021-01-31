@@ -21,6 +21,7 @@ export class Report {
       ratio: 0,
       level: 1,
       mastery: 0,
+      constellation: 0,
       talentLevels: [1, 1, 1],
       damageBoost: {},
       ...ganyuStats
@@ -70,6 +71,7 @@ export class Report {
     const frostflakeArrow = new Calculator(stats, this.targetStats).calculate()
 
     const [, amosChargeAttackAdditionalBonus] = WEAPON_AMOS_BOW.refine[this.weaponStats.refineRank]
+    const targetResistanceReduction = this.ganyuStats.constellation >= 1 ? 0.15 : 0;
     const amosArrowFlyBounsMaxTimes = 5;
     const frostflakeFlyBonusTimes = parseInt(this.weaponStats.arrowFlyElapsed / 0.1);
     const frostflakeBloomFlyBonusTimes = min([3, amosArrowFlyBounsMaxTimes - frostflakeFlyBonusTimes])
@@ -82,8 +84,12 @@ export class Report {
         other: round2(this.ganyuStats.damageBoost.other + amosArrowFlyElapsedBonus)
       }
     }
+    const targetStats = {
+      ...this.targetStats,
+      resistRatio: round2(0.1 - targetResistanceReduction)
+    }
 
-    const frostflakeArrowBloom = new Calculator(bloomStats, this.targetStats).calculate()
+    const frostflakeArrowBloom = new Calculator(bloomStats, targetStats).calculate()
 
     return {
       frostflakeArrow: {
