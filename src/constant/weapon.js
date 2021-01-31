@@ -33,3 +33,21 @@ export const WEAPON_AMOS_BOW = {
     5: [0.24, 0.16]
   }
 }
+
+export const WEAPON_SKYWARD_HARP = {
+  label: '天空之翼',
+  name: 'skyward_harp',
+  attack: {
+    90: 674
+  },
+  sub: {
+    90: 0.221
+  },
+  refine: {
+    1: [0.20, 1.25],
+    2: [0.25, 1.25],
+    3: [0.30, 1.25],
+    4: [0.35, 1.25],
+    5: [0.40, 1.25]
+  }
+}
