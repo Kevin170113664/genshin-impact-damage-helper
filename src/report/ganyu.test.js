@@ -102,6 +102,46 @@ describe('report', () => {
     })
   })
 
+  test('should be able to generate 甘雨 damage report with amos bow charged attack and no frostflake bonus', () => {
+    const ganyuStats = {
+      attack: 2165,
+      criticalRatio: 0.311,
+      criticalDamage: 2.353,
+      level: 83,
+      mastery: 0,
+      talentLevels: [8, 9, 9],
+      damageBoost: {
+        [E.CRYO]: 0.616,
+        other: 0.18
+      }
+    };
+    const targetStats = {
+      level: 85,
+    }
+    const weaponStats = {
+      name: WEAPON_AMOS_BOW.name,
+      refineRank: 3,
+      isChargedAttack: true,
+      arrowFlyElapsed: 0
+    };
+    const report = new Report(ganyuStats, targetStats, weaponStats).generate();
+
+    expect(report).toEqual({
+      chargeLevel2: {
+        frostflakeArrow: {
+          criticalDamage: 11961.82,
+          damageExpectation: 6178.13,
+          normalDamage: 3567.5
+        },
+        frostflakeArrowBloom: {
+          criticalDamage: 24376.16,
+          damageExpectation: 12589.98,
+          normalDamage: 7269.95
+        }
+      },
+    })
+  })
+
   test('should be able to generate 甘雨 damage report with amos bow elemental skill/burst', () => {
     const ganyuStats = {
       attack: 2500,

@@ -71,9 +71,9 @@ export class Report {
 
     const [, amosChargeAttackAdditionalBonus] = WEAPON_AMOS_BOW.refine[this.weaponStats.refineRank]
     const amosArrowFlyBounsMaxTimes = 5;
-    const frostflakeTimeout = 0.35;
-    const frostflakeArrowFlyBonusTimes = parseInt((this.weaponStats.arrowFlyElapsed + frostflakeTimeout) / 0.1)
-    const amosArrowFlyElapsedBonus = (amosArrowFlyBounsMaxTimes - min([frostflakeArrowFlyBonusTimes, amosArrowFlyBounsMaxTimes])) * amosChargeAttackAdditionalBonus;
+    const frostflakeFlyBonusTimes = parseInt(this.weaponStats.arrowFlyElapsed / 0.1);
+    const frostflakeBloomFlyBonusTimes = min([3, amosArrowFlyBounsMaxTimes - frostflakeFlyBonusTimes])
+    const amosArrowFlyElapsedBonus = frostflakeBloomFlyBonusTimes * amosChargeAttackAdditionalBonus;
     const bloomStats = {
       ...this.ganyuStats,
       ratio: TALENT_GANYU.normal[normalTalentLevel].frostflakeArrowBloom,
