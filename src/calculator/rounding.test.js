@@ -1,6 +1,11 @@
-import {round0, round2} from './rounding';
+import {round0, round2, round3} from './rounding';
 
 describe('rounding', () => {
+  test('should be able to round to 3 decimal', () => {
+    expect(round3(7.9945)).toEqual(7.995)
+    expect(round3(2.0583)).toEqual(2.058)
+  })
+
   test('should be able to round to 2 decimal', () => {
     expect(round2(7.994)).toEqual(7.99)
     expect(round2(12.715)).toEqual(12.72)
