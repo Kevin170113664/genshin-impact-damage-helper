@@ -7,7 +7,7 @@ import {Report} from './report/ganyu';
 import Coffee from './component/Coffee';
 import './App.css';
 import {WEAPON_AMOS_BOW, WEAPON_PROTOTYPE_CRESCENT, WEAPON_SKYWARD_HARP} from './constant/weapon';
-import {BLIZZARD_STRAYER} from './constant/artifact';
+import {BLIZZARD_STRAYER, WANDERER_TROUPE} from './constant/artifact';
 
 function App() {
   const [level, setLevel] = useState(90);
@@ -103,13 +103,18 @@ function App() {
   function getArtifactMenu() {
     return (
       <Menu onSelect={onSelectArtifact} onClick={onSelectArtifact}>
-        <Menu.Item key="blizzardStrayer">冰4</Menu.Item>
+        <Menu.Item key={BLIZZARD_STRAYER.name}>{BLIZZARD_STRAYER.label}</Menu.Item>
+        <Menu.Item key={WANDERER_TROUPE.name}>{WANDERER_TROUPE.label}</Menu.Item>
       </Menu>
     )
   }
 
   function getArtifactLabel() {
-    return '冰4'
+    const artifactLabel = {
+      [BLIZZARD_STRAYER.name]: BLIZZARD_STRAYER.label,
+      [WANDERER_TROUPE.name]: WANDERER_TROUPE.label
+    }
+    return artifactLabel[artifact]
   }
 
   function renderDropdown(title, menu, label) {
