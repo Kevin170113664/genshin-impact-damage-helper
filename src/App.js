@@ -74,25 +74,42 @@ function App() {
     setWeaponName(key)
   }
 
-  function renderDropdown(title) {
-    const menu = (
+  function getWeaponMenu() {
+    return (
       <Menu onSelect={onSelectWeapon} onClick={onSelectWeapon}>
         <Menu.Item key={WEAPON_AMOS_BOW.name}>{WEAPON_AMOS_BOW.label}</Menu.Item>
         <Menu.Item key={WEAPON_SKYWARD_HARP.name}>{WEAPON_SKYWARD_HARP.label}</Menu.Item>
         <Menu.Item key={WEAPON_PROTOTYPE_CRESCENT.name}>{WEAPON_PROTOTYPE_CRESCENT.label}</Menu.Item>
       </Menu>
-    );
+    )
+  }
+
+  function getWeaponLabel() {
     const weaponLabel = {
       [WEAPON_PROTOTYPE_CRESCENT.name]: WEAPON_PROTOTYPE_CRESCENT.label,
       [WEAPON_AMOS_BOW.name]: WEAPON_AMOS_BOW.label,
       [WEAPON_SKYWARD_HARP.name]: WEAPON_SKYWARD_HARP.label
     }
+    return weaponLabel[weaponName]
+  }
+
+  function getArtifactMenu() {
+    return <Menu>
+      <Menu.Item key="blizzardStrayer">冰4</Menu.Item>
+    </Menu>
+  }
+
+  function getArtifactLabel() {
+    return '冰4'
+  }
+
+  function renderDropdown(title, menu, label) {
     return (
       <Row className="stat-row">
         <Col span={12}>{title}</Col>
         <Col span={6} className='stat-value'>
           <Dropdown overlay={menu} placement="bottomLeft">
-            <Button size="small">{weaponLabel[weaponName]}</Button>
+            <Button size="small">{label}</Button>
           </Dropdown>
         </Col>
       </Row>
@@ -116,8 +133,12 @@ function App() {
           </div>
           <Row className="title weapon-stats">武器状态</Row>
           <div>
-            {renderDropdown('装备武器', '试做澹月')}
+            {renderDropdown('装备武器', getWeaponMenu(), getWeaponLabel())}
             {renderNumber('精炼等级', refineRank, setRefineRank, 1, 5)}
+          </div>
+          <Row className="title artifact">圣遗物</Row>
+          <div>
+            {renderDropdown('圣遗物套装', getArtifactMenu(), getArtifactLabel())}
           </div>
           <Row className="title constellation">命之座</Row>
           <div>
