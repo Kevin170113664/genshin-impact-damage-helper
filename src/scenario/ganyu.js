@@ -1,5 +1,7 @@
 import {WEAPON_AMOS_BOW, WEAPON_PROTOTYPE_CRESCENT, WEAPON_SKYWARD_HARP} from '../constant/weapon';
 import {round0, round2, round3} from '../calculator/rounding';
+import {BLIZZARD_STRAYER, WANDERER_TROUPE} from '../constant/artifact';
+import {E} from '../constant/element';
 
 export class Scenario {
   constructor(characterStats, weaponStats) {
@@ -9,6 +11,7 @@ export class Scenario {
     this.basicAttack = characterStats.basicAttack;
     this.additionalAttack = characterStats.additionalAttack;
     this.constellation = characterStats.constellation;
+    this.artifact = characterStats.artifact;
     this.weaponStats = weaponStats;
   }
 
@@ -39,7 +42,7 @@ export class Scenario {
       },
     };
     const scenario2 = {
-      description: '怪被冰元素附着(双冰共鸣，20突破天赋，冰套4)',
+      description: '怪被冰元素附着(双冰共鸣)',
       characterStats: {
         ...this.characterStats,
         attack: round0(this.basicAttack + this.additionalAttack),
@@ -53,14 +56,14 @@ export class Scenario {
     if (this.constellation >= 4) {
       const forthConstellationMaxBonus = 0.25;
       const scenario3 = {
-        description: '怪物被冰附着，站冰雨内吃满4命增伤(双冰共鸣，20突破天赋，冰套4)',
+        description: '怪物被冰附着，站冰雨内吃满4命增伤(双冰共鸣)',
         characterStats: {
           ...this.characterStats,
           attack: round0(this.basicAttack + this.additionalAttack),
           criticalRatio: round3(this.characterStats.criticalRatio + shatteringIceBonus + undividedHeartBonus + blizzardStrayerBonus),
           damageBoost: {
             ...this.characterStats.damageBoost,
-            other: round2((this.characterStats.damageBoost.other || 0) + PassiveTalentBonus + forthConstellationMaxBonus)
+            [E.CRYO]: round3((this.characterStats.damageBoost[E.CRYO] || 0) + PassiveTalentBonus + forthConstellationMaxBonus),
           }
         },
         targetStats: {
@@ -75,7 +78,8 @@ export class Scenario {
   generateAmosScenarios() {
     const [amosChargeAttackBonus, amosChargeAttackAdditionalBonus] = WEAPON_AMOS_BOW.refine[this.weaponStats.refineRank]
     const shatteringIceBonus = 0.15
-    const blizzardStrayerBonus = 0.2
+    const blizzardStrayerBonus = this.artifact === BLIZZARD_STRAYER.name ? 0.2 : 0
+    const troupeBonus = this.artifact === WANDERER_TROUPE.name ? WANDERER_TROUPE.chargedAttackDamageBoost : 0
     const undividedHeartBonus = this.characterStats.level > 20 ? 0.2 : 0
     const PassiveTalentBonus = this.characterStats.level > 70 ? 0.2 : 0;
     const targetResistanceReduction = this.constellation >= 1 ? 0.15 : 0;
@@ -87,7 +91,7 @@ export class Scenario {
         attack: round0(this.basicAttack + this.additionalAttack),
         damageBoost: {
           ...this.characterStats.damageBoost,
-          other: round2((this.characterStats.damageBoost.other || 0) + amosChargeAttackBonus)
+          other: round3((this.characterStats.damageBoost.other || 0) + amosChargeAttackBonus + troupeBonus)
         }
       },
       weaponStats: {
@@ -104,7 +108,7 @@ export class Scenario {
         attack: round0(this.basicAttack + this.additionalAttack),
         damageBoost: {
           ...this.characterStats.damageBoost,
-          other: round2((this.characterStats.damageBoost.other || 0) + amosChargeAttackBonus + amosChargeAttackAdditionalBonus * 2)
+          other: round3((this.characterStats.damageBoost.other || 0) + amosChargeAttackBonus + amosChargeAttackAdditionalBonus * 2 + troupeBonus)
         }
       },
       weaponStats: {
@@ -121,7 +125,7 @@ export class Scenario {
         attack: round0(this.basicAttack + this.additionalAttack),
         damageBoost: {
           ...this.characterStats.damageBoost,
-          other: round2((this.characterStats.damageBoost.other || 0) + amosChargeAttackBonus + amosChargeAttackAdditionalBonus * 5)
+          other: round3((this.characterStats.damageBoost.other || 0) + amosChargeAttackBonus + amosChargeAttackAdditionalBonus * 5 + troupeBonus)
         }
       },
       weaponStats: {
@@ -132,14 +136,14 @@ export class Scenario {
       }
     };
     const scenario4 = {
-      description: '蓄力二段吃满阿莫斯加成，怪物为冰附着(双冰共鸣，20突破天赋，冰套4)',
+      description: '蓄力二段吃满阿莫斯加成，怪物为冰附着(双冰共鸣)',
       characterStats: {
         ...this.characterStats,
         attack: round0(this.basicAttack + this.additionalAttack),
         criticalRatio: round3(this.characterStats.criticalRatio + shatteringIceBonus + undividedHeartBonus + blizzardStrayerBonus),
         damageBoost: {
           ...this.characterStats.damageBoost,
-          other: round2((this.characterStats.damageBoost.other || 0) + amosChargeAttackBonus + amosChargeAttackAdditionalBonus * 5)
+          other: round3((this.characterStats.damageBoost.other || 0) + amosChargeAttackBonus + amosChargeAttackAdditionalBonus * 5 + troupeBonus)
         }
       },
       targetStats: {
@@ -167,14 +171,15 @@ export class Scenario {
     if (this.constellation >= 4) {
       const forthConstellationMaxBonus = 0.25;
       const scenario5 = {
-        description: '蓄力二段吃满阿莫斯加成，怪物为冰附着，站冰雨内吃满4命增伤(双冰共鸣，20突破天赋，冰套4)',
+        description: '蓄力二段吃满阿莫斯加成，怪物为冰附着，站冰雨内吃满4命增伤(双冰共鸣)',
         characterStats: {
           ...this.characterStats,
           attack: round0(this.basicAttack + this.additionalAttack),
           criticalRatio: round3(this.characterStats.criticalRatio + shatteringIceBonus + undividedHeartBonus + blizzardStrayerBonus),
           damageBoost: {
             ...this.characterStats.damageBoost,
-            other: round2((this.characterStats.damageBoost.other || 0) + amosChargeAttackBonus + amosChargeAttackAdditionalBonus * 5 + PassiveTalentBonus + forthConstellationMaxBonus)
+            [E.CRYO]: round3((this.characterStats.damageBoost[E.CRYO] || 0) + PassiveTalentBonus + forthConstellationMaxBonus),
+            other: round3((this.characterStats.damageBoost.other || 0) + amosChargeAttackBonus + amosChargeAttackAdditionalBonus * 5 + troupeBonus)
           }
         },
         targetStats: {
@@ -210,7 +215,7 @@ export class Scenario {
     };
 
     const scenario2 = {
-      description: '发动试做澹月特效后(双冰共鸣，20突破天赋，冰套4)',
+      description: '发动试做澹月特效后(双冰共鸣)',
       characterStats: {
         ...this.characterStats,
         attack: round0(this.basicAttack * (1 + attackIncreaseRatio) + this.additionalAttack),
@@ -222,14 +227,14 @@ export class Scenario {
     };
 
     const scenario3 = {
-      description: '发动试做澹月特效后站在冰雨内(双冰共鸣，20突破天赋，冰套4)',
+      description: '发动试做澹月特效后站在冰雨内(双冰共鸣)',
       characterStats: {
         ...this.characterStats,
         attack: round0(this.basicAttack * (1 + attackIncreaseRatio) + this.additionalAttack),
         criticalRatio: round2(this.characterStats.criticalRatio + shatteringIceBonus + undividedHeartBonus + blizzardStrayerBonus),
         damageBoost: {
           ...this.characterStats.damageBoost,
-          other: round2((this.characterStats.damageBoost.other || 0) + PassiveTalentBonus)
+          other: round3((this.characterStats.damageBoost.other || 0) + PassiveTalentBonus)
         }
       },
       targetStats: {
@@ -240,14 +245,14 @@ export class Scenario {
     if (this.constellation >= 4) {
       const forthConstellationMaxBonus = 0.25;
       const scenario4 = {
-        description: '发动试做澹月特效后站在冰雨内吃满4命增伤(双冰共鸣，20突破天赋，冰套4)',
+        description: '发动试做澹月特效后站在冰雨内吃满4命增伤(双冰共鸣)',
         characterStats: {
           ...this.characterStats,
           attack: round0(this.basicAttack * (1 + attackIncreaseRatio) + this.additionalAttack),
           criticalRatio: round2(this.characterStats.criticalRatio + shatteringIceBonus + undividedHeartBonus + blizzardStrayerBonus),
           damageBoost: {
             ...this.characterStats.damageBoost,
-            other: round2((this.characterStats.damageBoost.other || 0) + PassiveTalentBonus + forthConstellationMaxBonus)
+            [E.CRYO]: round3((this.characterStats.damageBoost[E.CRYO] || 0) + PassiveTalentBonus + forthConstellationMaxBonus),
           }
         },
         targetStats: {

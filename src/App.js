@@ -7,6 +7,7 @@ import {Report} from './report/ganyu';
 import Coffee from './component/Coffee';
 import './App.css';
 import {WEAPON_AMOS_BOW, WEAPON_PROTOTYPE_CRESCENT, WEAPON_SKYWARD_HARP} from './constant/weapon';
+import {BLIZZARD_STRAYER} from './constant/artifact';
 
 function App() {
   const [level, setLevel] = useState(90);
@@ -22,6 +23,7 @@ function App() {
   const [constellation, setConstellation] = useState(6);
   const [refineRank, setRefineRank] = useState(5);
   const [weaponName, setWeaponName] = useState(WEAPON_AMOS_BOW.name);
+  const [artifact, setArtifact] = useState(BLIZZARD_STRAYER.name);
 
   const ganyuStats = {
     basicAttack,
@@ -32,6 +34,7 @@ function App() {
     mastery,
     constellation,
     talentLevels: [normalTalent, skillTalent, burstTalent],
+    artifact,
     damageBoost: {
       [E.CRYO]: cryoDamageBonus / 100
     }
@@ -74,6 +77,10 @@ function App() {
     setWeaponName(key)
   }
 
+  function onSelectArtifact({key}) {
+    setArtifact(key)
+  }
+
   function getWeaponMenu() {
     return (
       <Menu onSelect={onSelectWeapon} onClick={onSelectWeapon}>
@@ -94,9 +101,11 @@ function App() {
   }
 
   function getArtifactMenu() {
-    return <Menu>
-      <Menu.Item key="blizzardStrayer">冰4</Menu.Item>
-    </Menu>
+    return (
+      <Menu onSelect={onSelectArtifact} onClick={onSelectArtifact}>
+        <Menu.Item key="blizzardStrayer">冰4</Menu.Item>
+      </Menu>
+    )
   }
 
   function getArtifactLabel() {
