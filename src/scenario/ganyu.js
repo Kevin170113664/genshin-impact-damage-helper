@@ -76,6 +76,8 @@ export class Scenario {
   }
 
   generateAmosScenarios() {
+    const scenarios = [];
+
     const [amosChargeAttackBonus, amosChargeAttackAdditionalBonus] = WEAPON_AMOS_BOW.refine[this.weaponStats.refineRank]
     const shatteringIceBonus = 0.15
     const blizzardStrayerBonus = this.artifact === BLIZZARD_STRAYER.name ? 0.2 : 0
@@ -156,21 +158,40 @@ export class Scenario {
         arrowFlyElapsed: 0.5
       }
     };
-    const scenario6 = {
-      description: '阿莫斯之弓对元素战技和元素爆发没有加成',
-      characterStats: {
-        ...this.characterStats,
-        attack: round0(this.basicAttack + this.additionalAttack),
-      },
-      weaponStats: {
-        name: WEAPON_AMOS_BOW.name,
-        refineRank: this.weaponStats.refineRank
-      }
-    };
+    scenarios.push(scenario1);
+    scenarios.push(scenario2);
+    scenarios.push(scenario3);
+    scenarios.push(scenario4);
+
+    if (this.artifact === WANDERER_TROUPE.name) {
+      const scenario5 = {
+        description: '蓄力二段吃满阿莫斯加成，怪物为火附着，两段融化',
+        characterStats: {
+          ...this.characterStats,
+          attack: round0(this.basicAttack + this.additionalAttack),
+          attackType: E.CRYO,
+          damageBoost: {
+            ...this.characterStats.damageBoost,
+            other: round3((this.characterStats.damageBoost.other || 0) + amosChargeAttackBonus + amosChargeAttackAdditionalBonus * 5 + troupeBonus)
+          }
+        },
+        targetStats: {
+          attachedElement: E.PYRO,
+          resistRatio: round2(0.1 - targetResistanceReduction)
+        },
+        weaponStats: {
+          name: WEAPON_AMOS_BOW.name,
+          refineRank: this.weaponStats.refineRank,
+          isChargedAttack: true,
+          arrowFlyElapsed: 0.5
+        }
+      };
+      scenarios.push(scenario5)
+    }
 
     if (this.constellation >= 4) {
       const forthConstellationMaxBonus = 0.25;
-      const scenario5 = {
+      const scenario6 = {
         description: '蓄力二段吃满阿莫斯加成，怪物为冰附着，站冰雨内吃满4命增伤(双冰共鸣)',
         characterStats: {
           ...this.characterStats,
@@ -192,10 +213,23 @@ export class Scenario {
           arrowFlyElapsed: 0.5
         }
       };
-      return [scenario1, scenario2, scenario3, scenario4, scenario5, scenario6]
+      scenarios.push(scenario6)
     }
 
-    return [scenario1, scenario2, scenario3, scenario4, scenario6]
+    const scenario7 = {
+      description: '阿莫斯之弓对元素战技和元素爆发没有加成',
+      characterStats: {
+        ...this.characterStats,
+        attack: round0(this.basicAttack + this.additionalAttack),
+      },
+      weaponStats: {
+        name: WEAPON_AMOS_BOW.name,
+        refineRank: this.weaponStats.refineRank
+      }
+    };
+    scenarios.push(scenario7);
+
+    return scenarios
   }
 
   generateCrescentScenarios() {

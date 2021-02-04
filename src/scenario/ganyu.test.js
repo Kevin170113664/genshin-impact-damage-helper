@@ -458,6 +458,34 @@ describe('scenario', () => {
         }
       },
       {
+        description: '蓄力二段吃满阿莫斯加成，怪物为火附着，两段融化',
+        characterStats: {
+          artifact: WANDERER_TROUPE.name,
+          attack: 2382,
+          attackType: E.CRYO,
+          constellation: 6,
+          criticalDamage: 2,
+          criticalRatio: 0.5,
+          damageBoost: {
+            [E.CRYO]: 0.616,
+            other: 1.39
+          },
+          level: 90,
+          mastery: 80,
+          talentLevels: [11, 13, 13],
+        },
+        targetStats: {
+          attachedElement: E.PYRO,
+          resistRatio: -0.05
+        },
+        weaponStats: {
+          arrowFlyElapsed: 0.5,
+          isChargedAttack: true,
+          name: WEAPON_AMOS_BOW.name,
+          refineRank: 5
+        }
+      },
+      {
         description: '蓄力二段吃满阿莫斯加成，怪物为冰附着，站冰雨内吃满4命增伤(双冰共鸣)',
         characterStats: {
           attack: 2382,
