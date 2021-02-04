@@ -55,6 +55,11 @@ export class Report {
         elementalBurst: this.buildElementalBurstReport(),
       }
     }
+    if (this.weaponStats.isChargedAttack) {
+      return {
+        chargeLevel2: this.buildChargeLevel2Report()
+      }
+    }
     return {
       chargeLevel2: this.buildChargeLevel2Report(),
       elementalSkill: this.buildElementalSkillReport(),

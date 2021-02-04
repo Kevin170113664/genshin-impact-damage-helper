@@ -126,6 +126,9 @@ describe('scenario', () => {
       targetStats: {
         attachedElement: E.PYRO,
         resistRatio: -0.05
+      },
+      weaponStats: {
+        isChargedAttack: true
       }
     })
   })
@@ -706,6 +709,9 @@ describe('scenario', () => {
       targetStats: {
         attachedElement: E.PYRO,
         resistRatio: -0.05
+      },
+      weaponStats: {
+        isChargedAttack: true
       }
     })
   })

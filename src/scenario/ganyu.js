@@ -74,6 +74,9 @@ export class Scenario {
         targetStats: {
           attachedElement: E.PYRO,
           resistRatio: round2(0.1 - targetResistanceReduction)
+        },
+        weaponStats: {
+          isChargedAttack: true
         }
       }
       scenarios.push(scenario3)
@@ -324,7 +327,10 @@ export class Scenario {
         },
         targetStats: {
           attachedElement: E.PYRO,
-          resistRatio: round2(0.1 - targetResistanceReduction)
+          resistRatio: round2(0.1 - targetResistanceReduction),
+        },
+        weaponStats: {
+          isChargedAttack: true
         }
       }
       scenarios.push(scenario4)
