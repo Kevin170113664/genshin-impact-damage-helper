@@ -234,11 +234,14 @@ export class Scenario {
 
   generateCrescentScenarios() {
     const attackIncreaseRatio = WEAPON_PROTOTYPE_CRESCENT.refine[this.weaponStats.refineRank]
+    const troupeBonus = this.artifact === WANDERER_TROUPE.name ? WANDERER_TROUPE.chargedAttackDamageBoost : 0
     const shatteringIceBonus = 0.15
-    const blizzardStrayerBonus = 0.2
+    const blizzardStrayerBonus = this.artifact === BLIZZARD_STRAYER.name ? 0.2 : 0
     const undividedHeartBonus = this.characterStats.level > 20 ? 0.2 : 0
     const PassiveTalentBonus = this.characterStats.level > 70 ? 0.2 : 0;
     const targetResistanceReduction = this.constellation >= 1 ? 0.15 : 0;
+
+    const scenarios = [];
 
     const scenario1 = {
       description: '发动试做澹月特效前',
@@ -276,9 +279,36 @@ export class Scenario {
       }
     };
 
+    scenarios.push(scenario1);
+    scenarios.push(scenario2);
+    scenarios.push(scenario3);
+
+    if (this.artifact === WANDERER_TROUPE.name) {
+      const scenario4 = {
+        description: '发动试做澹月特效后，怪物为火附着，每段攻击都融化',
+        characterStats: {
+          ...this.characterStats,
+          attack: round0(this.basicAttack * (1 + attackIncreaseRatio) + this.additionalAttack),
+          criticalRatio: round2(this.characterStats.criticalRatio + undividedHeartBonus),
+          damageBoost: {
+            ...this.characterStats.damageBoost,
+            [E.CRYO]: round3((this.characterStats.damageBoost[E.CRYO] || 0) + troupeBonus),
+          }
+        },
+        targetStats: {
+          attachedElement: E.PYRO,
+          resistRatio: round2(0.1 - targetResistanceReduction)
+        },
+        weaponStats: {
+          isChargedAttack: true
+        }
+      }
+      scenarios.push(scenario4)
+    }
+
     if (this.constellation >= 4) {
       const forthConstellationMaxBonus = 0.25;
-      const scenario4 = {
+      const scenario5 = {
         description: '发动试做澹月特效后站在冰雨内吃满4命增伤(双冰共鸣)',
         characterStats: {
           ...this.characterStats,
@@ -293,9 +323,9 @@ export class Scenario {
           resistRatio: round2(0.1 - targetResistanceReduction)
         }
       }
-      return [scenario1, scenario2, scenario3, scenario4]
+      scenarios.push(scenario5)
     }
 
-    return [scenario1, scenario2, scenario3]
+    return scenarios
   }
 }

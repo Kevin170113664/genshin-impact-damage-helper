@@ -14,6 +14,7 @@ describe('scenario', () => {
       mastery: 0,
       constellation: 1,
       talentLevels: [11, 3, 6],
+      artifact: BLIZZARD_STRAYER.name,
       damageBoost: {
         [E.CRYO]: 0.616
       }
@@ -35,6 +36,7 @@ describe('scenario', () => {
           mastery: 0,
           constellation: 1,
           talentLevels: [11, 3, 6],
+          artifact: BLIZZARD_STRAYER.name,
           damageBoost: {
             [E.CRYO]: 0.616
           }
@@ -50,6 +52,7 @@ describe('scenario', () => {
           mastery: 0,
           constellation: 1,
           talentLevels: [11, 3, 6],
+          artifact: BLIZZARD_STRAYER.name,
           damageBoost: {
             [E.CRYO]: 0.616
           }
@@ -68,6 +71,7 @@ describe('scenario', () => {
           mastery: 0,
           constellation: 1,
           talentLevels: [11, 3, 6],
+          artifact: BLIZZARD_STRAYER.name,
           damageBoost: {
             [E.CRYO]: 0.616,
             other: 0.2
@@ -80,6 +84,54 @@ describe('scenario', () => {
     ])
   })
 
+  test('should be able to generate 甘雨 scenario with prototype crescent and use wanderer troupe set', () => {
+    const ganyuStats = {
+      basicAttack: 823,
+      additionalAttack: 1215,
+      criticalRatio: 0.45,
+      criticalDamage: 1.8,
+      level: 81,
+      mastery: 100,
+      constellation: 1,
+      talentLevels: [11, 3, 6],
+      attackType: E.CRYO,
+      artifact: WANDERER_TROUPE.name,
+      damageBoost: {
+        [E.CRYO]: 0.616
+      }
+    };
+    const weaponStats = {
+      name: 'prototype_crescent',
+      refineRank: 3
+    };
+    const scenarios = new Scenario(ganyuStats, weaponStats).generate();
+
+    expect(scenarios[3]).toEqual({
+      description: '发动试做澹月特效后，怪物为火附着，每段攻击都融化',
+      characterStats: {
+        attack: 2482,
+        criticalRatio: 0.65,
+        criticalDamage: 1.8,
+        level: 81,
+        mastery: 100,
+        constellation: 1,
+        attackType: E.CRYO,
+        talentLevels: [11, 3, 6],
+        artifact: WANDERER_TROUPE.name,
+        damageBoost: {
+          [E.CRYO]: 0.966
+        }
+      },
+      targetStats: {
+        attachedElement: E.PYRO,
+        resistRatio: -0.05
+      },
+      weaponStats: {
+        isChargedAttack: true
+      }
+    })
+  })
+
   test('should be able to generate 甘雨 scenario with prototype crescent and has forth constellation', () => {
     const ganyuStats = {
       basicAttack: 823,
@@ -90,6 +142,7 @@ describe('scenario', () => {
       mastery: 0,
       constellation: 4,
       talentLevels: [11, 3, 6],
+      artifact: BLIZZARD_STRAYER.name,
       damageBoost: {
         [E.CRYO]: 0.616
       }
@@ -111,6 +164,7 @@ describe('scenario', () => {
           mastery: 0,
           constellation: 4,
           talentLevels: [11, 3, 6],
+          artifact: BLIZZARD_STRAYER.name,
           damageBoost: {
             [E.CRYO]: 0.616
           }
@@ -126,6 +180,7 @@ describe('scenario', () => {
           mastery: 0,
           constellation: 4,
           talentLevels: [11, 3, 6],
+          artifact: BLIZZARD_STRAYER.name,
           damageBoost: {
             [E.CRYO]: 0.616
           }
@@ -144,6 +199,7 @@ describe('scenario', () => {
           mastery: 0,
           constellation: 4,
           talentLevels: [11, 3, 6],
+          artifact: BLIZZARD_STRAYER.name,
           damageBoost: {
             [E.CRYO]: 0.616,
             other: 0.2
@@ -163,6 +219,7 @@ describe('scenario', () => {
           mastery: 0,
           constellation: 4,
           talentLevels: [11, 3, 6],
+          artifact: BLIZZARD_STRAYER.name,
           damageBoost: {
             [E.CRYO]: 1.066
           }
