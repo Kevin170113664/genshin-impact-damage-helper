@@ -119,7 +119,8 @@ describe('scenario', () => {
         talentLevels: [11, 3, 6],
         artifact: WANDERER_TROUPE.name,
         damageBoost: {
-          [E.CRYO]: 0.966
+          [E.CRYO]: 0.616,
+          other: 0.35,
         }
       },
       targetStats: {

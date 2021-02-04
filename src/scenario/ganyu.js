@@ -319,7 +319,7 @@ export class Scenario {
           criticalRatio: round2(this.characterStats.criticalRatio + undividedHeartBonus),
           damageBoost: {
             ...this.characterStats.damageBoost,
-            [E.CRYO]: round3((this.characterStats.damageBoost[E.CRYO] || 0) + troupeBonus),
+            other: round3((this.characterStats.damageBoost.other || 0) + troupeBonus),
           }
         },
         targetStats: {
