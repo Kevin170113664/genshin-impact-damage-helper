@@ -125,9 +125,6 @@ describe('scenario', () => {
       targetStats: {
         attachedElement: E.PYRO,
         resistRatio: -0.05
-      },
-      weaponStats: {
-        isChargedAttack: true
       }
     })
   })
@@ -664,5 +661,51 @@ describe('scenario', () => {
         }
       }
     ])
+  })
+
+  test('should be able to generate 甘雨 scenario with skyward harp and wanderer troupe set', () => {
+    const ganyuStats = {
+      basicAttack: 1009,
+      additionalAttack: 1110,
+      criticalRatio: 0.45,
+      criticalDamage: 2.6,
+      level: 90,
+      mastery: 120,
+      constellation: 6,
+      attackType: E.CRYO,
+      talentLevels: [11, 13, 13],
+      artifact: WANDERER_TROUPE.name,
+      damageBoost: {
+        [E.CRYO]: 0.616
+      }
+    };
+    const weaponStats = {
+      name: WEAPON_SKYWARD_HARP.name,
+      refineRank: 5
+    };
+    const scenarios = new Scenario(ganyuStats, weaponStats).generate();
+
+    expect(scenarios[2]).toEqual({
+      description: '怪物为火附着，每段攻击都融化',
+      characterStats: {
+        attack: 2119,
+        criticalRatio: 0.65,
+        criticalDamage: 2.6,
+        level: 90,
+        mastery: 120,
+        constellation: 6,
+        attackType: E.CRYO,
+        talentLevels: [11, 13, 13],
+        artifact: WANDERER_TROUPE.name,
+        damageBoost: {
+          [E.CRYO]: 0.616,
+          other: 0.35
+        }
+      },
+      targetStats: {
+        attachedElement: E.PYRO,
+        resistRatio: -0.05
+      }
+    })
   })
 })

@@ -33,6 +33,9 @@ export class Scenario {
     const undividedHeartBonus = this.characterStats.level > 20 ? 0.2 : 0
     const PassiveTalentBonus = this.characterStats.level > 70 ? 0.2 : 0;
     const targetResistanceReduction = this.constellation >= 1 ? 0.15 : 0;
+    const troupeBonus = this.artifact === WANDERER_TROUPE.name ? WANDERER_TROUPE.chargedAttackDamageBoost : 0
+
+    const scenarios = [];
 
     const scenario1 = {
       description: '怪没有冰附着',
@@ -53,9 +56,32 @@ export class Scenario {
       }
     };
 
+    scenarios.push(scenario1)
+    scenarios.push(scenario2)
+
+    if (this.artifact === WANDERER_TROUPE.name) {
+      const scenario3 = {
+        description: '怪物为火附着，每段攻击都融化',
+        characterStats: {
+          ...this.characterStats,
+          attack: round0(this.basicAttack + this.additionalAttack),
+          criticalRatio: round2(this.characterStats.criticalRatio + undividedHeartBonus),
+          damageBoost: {
+            ...this.characterStats.damageBoost,
+            other: round3((this.characterStats.damageBoost.other || 0) + troupeBonus),
+          }
+        },
+        targetStats: {
+          attachedElement: E.PYRO,
+          resistRatio: round2(0.1 - targetResistanceReduction)
+        }
+      }
+      scenarios.push(scenario3)
+    }
+
     if (this.constellation >= 4) {
       const forthConstellationMaxBonus = 0.25;
-      const scenario3 = {
+      const scenario4 = {
         description: '怪物被冰附着，站冰雨内吃满4命增伤(双冰共鸣)',
         characterStats: {
           ...this.characterStats,
@@ -70,9 +96,10 @@ export class Scenario {
           resistRatio: round2(0.1 - targetResistanceReduction)
         },
       };
-      return [scenario1, scenario2, scenario3]
+      scenarios.push(scenario4)
     }
-    return [scenario1, scenario2]
+
+    return scenarios
   }
 
   generateAmosScenarios() {
@@ -298,9 +325,6 @@ export class Scenario {
         targetStats: {
           attachedElement: E.PYRO,
           resistRatio: round2(0.1 - targetResistanceReduction)
-        },
-        weaponStats: {
-          isChargedAttack: true
         }
       }
       scenarios.push(scenario4)
