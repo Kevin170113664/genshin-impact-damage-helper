@@ -1,6 +1,7 @@
 import {E} from '../constant/element';
 import {Report} from './ganyu';
 import {WEAPON_AMOS_BOW} from '../constant/weapon';
+import {WANDERER_TROUPE} from '../constant/artifact';
 
 describe('report', () => {
   test('should be able to generate 甘雨 damage report with crescent', () => {
@@ -58,6 +59,66 @@ describe('report', () => {
           damageExpectation: 2036.44,
           normalDamage: 1436.52
         },
+      }
+    })
+  })
+
+  test('should be able to generate 甘雨 damage report with crescent and wanderer troupe set', () => {
+    const ganyuStats = {
+      attack: 2669,
+      criticalRatio: 0.248,
+      criticalDamage: 2.12,
+      level: 90,
+      mastery: 0,
+      constellation: 1,
+      talentLevels: [8, 8, 8],
+      artifact: WANDERER_TROUPE.name,
+      damageBoost: {
+        [E.CRYO]: 0.466
+      }
+    };
+    const targetStats = {
+      level: 86,
+      resistRatio: -0.05
+    }
+    const report = new Report(ganyuStats, targetStats).generate();
+
+    expect(report).toEqual({
+      chargeLevel2: {
+        frostflakeArrow: {
+          criticalDamage: 16056.93,
+          damageExpectation: 7852.25,
+          normalDamage: 5146.45
+        },
+        frostflakeArrowBloom: {
+          criticalDamage: 27257.62,
+          damageExpectation: 13329.67,
+          normalDamage: 8736.42
+        },
+      },
+      elementalBurst: {
+        allIceShard: {
+          criticalDamage: 361172.82,
+          damageExpectation: 176622.69,
+          normalDamage: 115760.31
+        },
+        singleIceShard: {
+          criticalDamage: 7081.82,
+          damageExpectation: 3463.19,
+          normalDamage: 2269.81
+        }
+      },
+      elementalSkill: {
+        '1-hit': {
+          criticalDamage: 13341.64,
+          damageExpectation: 6524.4,
+          normalDamage: 4276.17
+        },
+        '2-hit': {
+          criticalDamage: 13341.64,
+          damageExpectation: 6524.4,
+          normalDamage: 4276.17
+        }
       }
     })
   })

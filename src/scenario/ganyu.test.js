@@ -97,7 +97,7 @@ describe('scenario', () => {
       attackType: E.CRYO,
       artifact: WANDERER_TROUPE.name,
       damageBoost: {
-        [E.CRYO]: 0.616
+        [E.CRYO]: 0.466
       }
     };
     const weaponStats = {
@@ -106,6 +106,26 @@ describe('scenario', () => {
     };
     const scenarios = new Scenario(ganyuStats, weaponStats).generate();
 
+    expect(scenarios[1]).toEqual({
+      description: '发动试做澹月特效后(双冰共鸣)',
+      characterStats: {
+        attack: 2482,
+        criticalRatio: 0.8,
+        criticalDamage: 1.8,
+        level: 81,
+        mastery: 100,
+        constellation: 1,
+        attackType: E.CRYO,
+        talentLevels: [11, 3, 6],
+        artifact: WANDERER_TROUPE.name,
+        damageBoost: {
+          [E.CRYO]: 0.466,
+        }
+      },
+      targetStats: {
+        resistRatio: -0.05
+      }
+    })
     expect(scenarios[3]).toEqual({
       description: '发动试做澹月特效后，怪物为火附着，每段攻击都融化',
       characterStats: {
@@ -119,16 +139,12 @@ describe('scenario', () => {
         talentLevels: [11, 3, 6],
         artifact: WANDERER_TROUPE.name,
         damageBoost: {
-          [E.CRYO]: 0.616,
-          other: 0.35,
+          [E.CRYO]: 0.466,
         }
       },
       targetStats: {
         attachedElement: E.PYRO,
         resistRatio: -0.05
-      },
-      weaponStats: {
-        isChargedAttack: true
       }
     })
   })
@@ -433,7 +449,7 @@ describe('scenario', () => {
           artifact: WANDERER_TROUPE.name,
           damageBoost: {
             [E.CRYO]: 0.616,
-            other: 0.59
+            other: 0.24
           }
         },
         weaponStats: {
@@ -456,7 +472,7 @@ describe('scenario', () => {
           artifact: WANDERER_TROUPE.name,
           damageBoost: {
             [E.CRYO]: 0.616,
-            other: 0.91
+            other: 0.56
           }
         },
         weaponStats: {
@@ -479,7 +495,7 @@ describe('scenario', () => {
           artifact: WANDERER_TROUPE.name,
           damageBoost: {
             [E.CRYO]: 0.616,
-            other: 1.39
+            other: 1.04
           }
         },
         weaponStats: {
@@ -502,7 +518,7 @@ describe('scenario', () => {
           artifact: WANDERER_TROUPE.name,
           damageBoost: {
             [E.CRYO]: 0.616,
-            other: 1.39
+            other: 1.04
           }
         },
         targetStats: {
@@ -526,7 +542,7 @@ describe('scenario', () => {
           criticalRatio: 0.5,
           damageBoost: {
             [E.CRYO]: 0.616,
-            other: 1.39
+            other: 1.04
           },
           level: 90,
           mastery: 80,
@@ -556,7 +572,7 @@ describe('scenario', () => {
           artifact: WANDERER_TROUPE.name,
           damageBoost: {
             [E.CRYO]: 1.066,
-            other: 1.39
+            other: 1.04
           }
         },
         targetStats: {
@@ -680,7 +696,7 @@ describe('scenario', () => {
       talentLevels: [11, 13, 13],
       artifact: WANDERER_TROUPE.name,
       damageBoost: {
-        [E.CRYO]: 0.616
+        [E.CRYO]: 0.466
       }
     };
     const weaponStats = {
@@ -702,8 +718,7 @@ describe('scenario', () => {
         talentLevels: [11, 13, 13],
         artifact: WANDERER_TROUPE.name,
         damageBoost: {
-          [E.CRYO]: 0.616,
-          other: 0.35
+          [E.CRYO]: 0.466
         }
       },
       targetStats: {

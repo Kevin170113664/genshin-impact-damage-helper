@@ -2,8 +2,9 @@ import min from 'lodash/min';
 import {Calculator} from '../calculator/real-damage';
 import {TALENT_GANYU} from '../constant/talent';
 import {ATTACK_TYPE} from '../constant/attack-type';
-import {round2} from '../calculator/rounding';
+import {round2, round3} from '../calculator/rounding';
 import {WEAPON_AMOS_BOW} from '../constant/weapon';
+import {WANDERER_TROUPE} from '../constant/artifact';
 
 export class Report {
   constructor(ganyuStats, targetStats, weaponStats) {
@@ -55,11 +56,6 @@ export class Report {
         elementalBurst: this.buildElementalBurstReport(),
       }
     }
-    if (this.weaponStats.isChargedAttack) {
-      return {
-        chargeLevel2: this.buildChargeLevel2Report()
-      }
-    }
     return {
       chargeLevel2: this.buildChargeLevel2Report(),
       elementalSkill: this.buildElementalSkillReport(),
@@ -69,9 +65,15 @@ export class Report {
 
   buildAmosChargeLevel2Report() {
     const [normalTalentLevel] = this.ganyuStats.talentLevels;
+    const troupeBonus = this.ganyuStats.artifact === WANDERER_TROUPE.name ? WANDERER_TROUPE.chargedAttackDamageBoost : 0;
+
     const stats = {
       ...this.ganyuStats,
       ratio: TALENT_GANYU.normal[normalTalentLevel].frostflakeArrow,
+      damageBoost: {
+        ...this.ganyuStats.damageBoost,
+        other: round3((this.ganyuStats.damageBoost.other || 0) + troupeBonus),
+      }
     }
     const frostflakeArrow = new Calculator(stats, this.targetStats).calculate()
 
@@ -86,7 +88,7 @@ export class Report {
       ratio: TALENT_GANYU.normal[normalTalentLevel].frostflakeArrowBloom,
       damageBoost: {
         ...this.ganyuStats.damageBoost,
-        other: round2(this.ganyuStats.damageBoost.other + amosArrowFlyElapsedBonus)
+        other: round2((this.ganyuStats.damageBoost.other || 0) + amosArrowFlyElapsedBonus + troupeBonus)
       }
     }
     const targetStats = {
@@ -113,13 +115,22 @@ export class Report {
   buildChargeLevel2Report() {
     const [normalTalentLevel] = this.ganyuStats.talentLevels;
     const targetResistanceReduction = this.ganyuStats.constellation >= 1 ? 0.15 : 0;
+    const troupeBonus = this.ganyuStats.artifact === WANDERER_TROUPE.name ? WANDERER_TROUPE.chargedAttackDamageBoost : 0
     const stats = {
       ...this.ganyuStats,
       ratio: TALENT_GANYU.normal[normalTalentLevel].frostflakeArrow,
+      damageBoost: {
+        ...this.ganyuStats.damageBoost,
+        other: round3((this.ganyuStats.damageBoost.other || 0) + troupeBonus),
+      }
     }
     const bloomStats = {
       ...this.ganyuStats,
       ratio: TALENT_GANYU.normal[normalTalentLevel].frostflakeArrowBloom,
+      damageBoost: {
+        ...this.ganyuStats.damageBoost,
+        other: round3((this.ganyuStats.damageBoost.other || 0) + troupeBonus),
+      }
     }
     const targetStats = {
       ...this.targetStats,

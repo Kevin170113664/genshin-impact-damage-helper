@@ -33,7 +33,6 @@ export class Scenario {
     const undividedHeartBonus = this.characterStats.level > 20 ? 0.2 : 0
     const PassiveTalentBonus = this.characterStats.level > 70 ? 0.2 : 0;
     const targetResistanceReduction = this.constellation >= 1 ? 0.15 : 0;
-    const troupeBonus = this.artifact === WANDERER_TROUPE.name ? WANDERER_TROUPE.chargedAttackDamageBoost : 0
 
     const scenarios = [];
 
@@ -66,10 +65,6 @@ export class Scenario {
           ...this.characterStats,
           attack: round0(this.basicAttack + this.additionalAttack),
           criticalRatio: round2(this.characterStats.criticalRatio + undividedHeartBonus),
-          damageBoost: {
-            ...this.characterStats.damageBoost,
-            other: round3((this.characterStats.damageBoost.other || 0) + troupeBonus),
-          }
         },
         targetStats: {
           attachedElement: E.PYRO,
@@ -111,7 +106,6 @@ export class Scenario {
     const [amosChargeAttackBonus, amosChargeAttackAdditionalBonus] = WEAPON_AMOS_BOW.refine[this.weaponStats.refineRank]
     const shatteringIceBonus = 0.15
     const blizzardStrayerBonus = this.artifact === BLIZZARD_STRAYER.name ? 0.2 : 0
-    const troupeBonus = this.artifact === WANDERER_TROUPE.name ? WANDERER_TROUPE.chargedAttackDamageBoost : 0
     const undividedHeartBonus = this.characterStats.level > 20 ? 0.2 : 0
     const PassiveTalentBonus = this.characterStats.level > 70 ? 0.2 : 0;
     const targetResistanceReduction = this.constellation >= 1 ? 0.15 : 0;
@@ -123,7 +117,7 @@ export class Scenario {
         attack: round0(this.basicAttack + this.additionalAttack),
         damageBoost: {
           ...this.characterStats.damageBoost,
-          other: round3((this.characterStats.damageBoost.other || 0) + amosChargeAttackBonus + troupeBonus)
+          other: round3((this.characterStats.damageBoost.other || 0) + amosChargeAttackBonus)
         }
       },
       weaponStats: {
@@ -140,7 +134,7 @@ export class Scenario {
         attack: round0(this.basicAttack + this.additionalAttack),
         damageBoost: {
           ...this.characterStats.damageBoost,
-          other: round3((this.characterStats.damageBoost.other || 0) + amosChargeAttackBonus + amosChargeAttackAdditionalBonus * 2 + troupeBonus)
+          other: round3((this.characterStats.damageBoost.other || 0) + amosChargeAttackBonus + amosChargeAttackAdditionalBonus * 2)
         }
       },
       weaponStats: {
@@ -157,7 +151,7 @@ export class Scenario {
         attack: round0(this.basicAttack + this.additionalAttack),
         damageBoost: {
           ...this.characterStats.damageBoost,
-          other: round3((this.characterStats.damageBoost.other || 0) + amosChargeAttackBonus + amosChargeAttackAdditionalBonus * 5 + troupeBonus)
+          other: round3((this.characterStats.damageBoost.other || 0) + amosChargeAttackBonus + amosChargeAttackAdditionalBonus * 5)
         }
       },
       weaponStats: {
@@ -175,7 +169,7 @@ export class Scenario {
         criticalRatio: round3(this.characterStats.criticalRatio + shatteringIceBonus + undividedHeartBonus + blizzardStrayerBonus),
         damageBoost: {
           ...this.characterStats.damageBoost,
-          other: round3((this.characterStats.damageBoost.other || 0) + amosChargeAttackBonus + amosChargeAttackAdditionalBonus * 5 + troupeBonus)
+          other: round3((this.characterStats.damageBoost.other || 0) + amosChargeAttackBonus + amosChargeAttackAdditionalBonus * 5)
         }
       },
       targetStats: {
@@ -202,7 +196,7 @@ export class Scenario {
           attackType: E.CRYO,
           damageBoost: {
             ...this.characterStats.damageBoost,
-            other: round3((this.characterStats.damageBoost.other || 0) + amosChargeAttackBonus + amosChargeAttackAdditionalBonus * 5 + troupeBonus)
+            other: round3((this.characterStats.damageBoost.other || 0) + amosChargeAttackBonus + amosChargeAttackAdditionalBonus * 5)
           }
         },
         targetStats: {
@@ -230,7 +224,7 @@ export class Scenario {
           damageBoost: {
             ...this.characterStats.damageBoost,
             [E.CRYO]: round3((this.characterStats.damageBoost[E.CRYO] || 0) + PassiveTalentBonus + forthConstellationMaxBonus),
-            other: round3((this.characterStats.damageBoost.other || 0) + amosChargeAttackBonus + amosChargeAttackAdditionalBonus * 5 + troupeBonus)
+            other: round3((this.characterStats.damageBoost.other || 0) + amosChargeAttackBonus + amosChargeAttackAdditionalBonus * 5)
           }
         },
         targetStats: {
@@ -264,7 +258,6 @@ export class Scenario {
 
   generateCrescentScenarios() {
     const attackIncreaseRatio = WEAPON_PROTOTYPE_CRESCENT.refine[this.weaponStats.refineRank]
-    const troupeBonus = this.artifact === WANDERER_TROUPE.name ? WANDERER_TROUPE.chargedAttackDamageBoost : 0
     const shatteringIceBonus = 0.15
     const blizzardStrayerBonus = this.artifact === BLIZZARD_STRAYER.name ? 0.2 : 0
     const undividedHeartBonus = this.characterStats.level > 20 ? 0.2 : 0
@@ -320,17 +313,10 @@ export class Scenario {
           ...this.characterStats,
           attack: round0(this.basicAttack * (1 + attackIncreaseRatio) + this.additionalAttack),
           criticalRatio: round2(this.characterStats.criticalRatio + undividedHeartBonus),
-          damageBoost: {
-            ...this.characterStats.damageBoost,
-            other: round3((this.characterStats.damageBoost.other || 0) + troupeBonus),
-          }
         },
         targetStats: {
           attachedElement: E.PYRO,
           resistRatio: round2(0.1 - targetResistanceReduction),
-        },
-        weaponStats: {
-          isChargedAttack: true
         }
       }
       scenarios.push(scenario4)
