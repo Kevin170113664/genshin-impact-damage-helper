@@ -1,6 +1,6 @@
 # 原神伤害计算助手
 
-https://kevin170113664.github.io/genshin-impact-damage-helper/
+http://genshin.hinatsuruai.com/
 
 > 唔，因为是用github pages部署的，所以现在会被墙
 >
