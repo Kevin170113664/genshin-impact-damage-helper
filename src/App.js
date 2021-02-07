@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import range from 'lodash/range';
 import {Row, Col, InputNumber, Menu, Dropdown, Button} from 'antd';
 import DamageScenario from './component/DamageScenario';
 import {E} from './constant/element';
@@ -8,6 +9,7 @@ import Coffee from './component/Coffee';
 import './App.css';
 import {WEAPON_AMOS_BOW, WEAPON_PROTOTYPE_CRESCENT, WEAPON_SKYWARD_HARP} from './constant/weapon';
 import {BLIZZARD_STRAYER, WANDERER_TROUPE} from './constant/artifact';
+import {getEnum} from './calculator/enum';
 
 function App() {
   const [level, setLevel] = useState(90);
@@ -33,7 +35,7 @@ function App() {
     level,
     mastery,
     constellation,
-    talentLevels: [normalTalent, skillTalent, burstTalent],
+    talentLevels: [getEnum(normalTalent, range(1, 12)), getEnum(skillTalent, range(1, 14)), getEnum(burstTalent, range(1, 14))],
     artifact,
     damageBoost: {
       [E.CRYO]: cryoDamageBonus / 100
@@ -41,7 +43,7 @@ function App() {
   };
   const weaponStats = {
     name: weaponName,
-    refineRank
+    refineRank: getEnum(refineRank, range(1, 6))
   };
 
   const scenarios = new Scenario(ganyuStats, weaponStats).generate();
